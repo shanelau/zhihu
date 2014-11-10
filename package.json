@@ -1,0 +1,24 @@
+{
+  "name": "zhihu-api",
+  "preferGlobal": "true",
+  "version": "0.0.1",
+  "private": true,
+  "author": "liuxing <shanelau@gmail.com>",
+  "description": "zhihu api ,get zhihu date",
+  "scripts": {
+    "start": "node index",
+    "test": "mocha"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {
+    "async": "*",
+    "bluebird": "*",
+    "cheerio": "^0.17.0",
+    "lodash": "*",
+    "request": "*"
+  },
+  "devDependencies": {}
+}
