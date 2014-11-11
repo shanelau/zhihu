@@ -22,29 +22,29 @@ function formatFollowData(str){
     }
     return parseInt(str);
 }
-
-module.exports = {
-    getUserByName: function (name){
-        var data = {
-            url:config.userInfo,
-            qs:{
-                params:JSON.stringify({url_token:name})
-            }
+var getUserByName = function (name){
+    var data = {
+        url:config.user.info,
+        qs:{
+            params:JSON.stringify({url_token:name})
+        }
+    };
+    return request(data).then(function(content){
+        var responseBody = content[0].body;
+        var $ = cheerio.load(responseBody);
+        var values = $("span.value");
+        var result = {
+            answer: formatFollowData(values.eq(0).text()),
+            post : formatFollowData(values.eq(1).text()),
+            follower : formatFollowData(values.eq(2).text())
         };
-        return request(data).then(function(content){
-            var responseBody = content[0].body;
-            var $ = cheerio.load(responseBody);
-            var values = $("span.value");
-            var result = {
-                answer: formatFollowData(values.eq(0).text()),
-                post : formatFollowData(values.eq(1).text()),
-                follower : formatFollowData(values.eq(2).text())
-            };
-            result.profileUrl = config.zhihuDomain+$('a.avatar-link').attr('href');
-            result.name = $('span.name').text();
-            var male = $('.icon-profile-female');
-            result.sex = male.length === 1 ? 'female':'male';
-            return result;
-        });
-    },
+        result.profileUrl = config.zhihu+$('a.avatar-link').attr('href');
+        result.name = $('span.name').text();
+        var male = $('.icon-profile-female');
+        result.sex = male.length === 1 ? 'female':'male';
+        return result;
+    });
+}
+module.exports = {
+    getUserByName: getUserByName
 }

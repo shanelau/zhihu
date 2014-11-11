@@ -9,56 +9,65 @@
 
 var Promise = require('bluebird'),
     request = Promise.promisify(require("request")),
-    cheerio = require('cheerio'),
     config  = require('./config'),
     url     = require('url'),
     User    = require('./User'),
+    _       = require('lodash');
 
-_       = require('lodash');
-
-function getLikerUrl(postUrl){
+function getRealUrl(apiUrl,postUrl){
     var pathname = url.parse(postUrl).pathname;
     var paths = pathname.split('\/');
-    if(paths.length < 3){
+    if(paths.length < 0){
         throw new Error("Url error!");
     }
     var data = {name:paths[1],postID:paths[2]};
-    return _.template(config.postLikers,data);
+    return _.template(apiUrl,data);
 }
 
-var api = {
-    postLikers: function (postUrl){
-        var url = getLikerUrl(postUrl);
-        var data = {
-            url:url
-        };
-        return request(data).then(function(content){
-            var users = content[0].body;
-            return JSON.parse(users);
-        });
-    },
-    /**
-     * get full userinfo who stared post
-     * @param postUrl post's url
-     * @returns {*}  User Object  contain detail userinfo , number of question, number of answer etc
-     */
-    postLikersDetail: function (postUrl){
-        return api.postLikers(postUrl).then(function(users){
-            if(users.length > 0){
-                console.log("点赞人数 %s",users.length);
-                return Promise.map(users, function( user) {
-                    console.log(" 查询用户 : %s",user.name);
-                    return User.getUserByName(user.name).then(function(result){
-                        return result;
-                    });
-                }, {concurrency: 30}).then(function() {
-                    console.log("finish all");
-                    users = _.sortBy(users,'follower').reverse();
-                    return users;
+
+var getLikers = function (postUrl){
+    var url = getRealUrl(config.post.likers,postUrl);
+    var data = {
+        url:url
+    };
+    return request(data).then(function(content){
+        var users = content[0].body;
+        return JSON.parse(users);
+    });
+}
+/**
+ * get full userinfo who stared post
+ * @param postUrl post's url
+ * @returns {*}  User Object  contain detail userinfo , number of question, number of answer etc
+ */
+var likersDetail = function (postUrl){
+    return getLikers(postUrl).then(function(users){
+        if(users.length > 0){
+            return Promise.map(users, function( user) {
+                return User.getUserByName(user.name).then(function(result){
+                    return result;
                 });
-            }
-        });
-    }
-
+            }, {concurrency: 30}).then(function() {
+                users = _.sortBy(users,'follower').reverse();
+                return users;
+            });
+        }
+    });
 }
-module.exports = api;
+var info = function (postUrl) {
+    var url = getRealUrl(config.post.info, postUrl);
+    var options = {
+        url:url,
+        gzip:true
+    };
+    return new Promise(function (resolve, reject) {
+        request(options, function (err, res, body) {
+            resolve(JSON.parse(body));
+        });
+    });
+}
+
+module.exports = {
+    likersDetail: likersDetail,
+    info: info
+};

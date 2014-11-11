@@ -1,10 +1,9 @@
 {
-  "name": "zhihu-api",
+  "name": "zhihu",
   "preferGlobal": "true",
-  "version": "0.0.1",
-  "private": true,
-  "author": "liuxing <shanelau@gmail.com>",
-  "description": "zhihu api ,get zhihu date",
+  "version": "0.0.3",
+  "author": "shanelau <shanelau@gmail.com>",
+  "description": "zhihu api ,获取知乎平台信息数据的接口",
   "scripts": {
     "start": "node index",
     "test": "mocha"
@@ -20,5 +19,7 @@
     "lodash": "*",
     "request": "*"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "should": "^4.3.0"
+  }
 }
