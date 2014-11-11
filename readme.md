@@ -1,4 +1,4 @@
-# 知乎数据API 接口 powered by  nodejs
+# 知乎数据API 接口  nodejs
 ======
 根据这些接口获取到知乎的数据，包括用户、问答、专栏信息
 
@@ -21,7 +21,7 @@ zhihu.User.getUserByName(name).then(function(user){
 
 
 
-##用户 API--User
+##用户 API
 ### User.getUserByName(username)
 根据用户名获取到用户的信息，用户名为用的唯一标识，参见个人主页的url,或者设置中的个性网站  
 
@@ -58,24 +58,9 @@ zhihu.User.getUserByName(name).then(function(user){
   sex: 'male' }
 
 ```
-### questions
-用户的提问列表
-@TODO
-
-### answers
-用户的回答列表
-@TODO
-### zhuanlansFocus
-用户关注的专栏
-@TODO
-
-### topic
-## 用户关注的话题信息
-@TODO
 
 
-
-##专栏文章 API--Post
+##专栏文章--Post
 ### Post.info(postUrl)
 获取专栏文章的详细信息
 
@@ -130,8 +115,8 @@ zhihu.Post.info(postUrl).then(function(data){
 * `{Array}`   //User
 
 
-## 答案 API
-### Answer.likers
+## 答案 Answer
+### likers
 获取答案的点赞者  
 @TODO 
 
@@ -148,6 +133,21 @@ zhihu.Post.info(postUrl).then(function(data){
 @TODO
 
 
+
+### questions
+用户的提问列表  
+@TODO
+
+### answers
+用户的回答列表  
+@TODO
+### zhuanlansFocus
+用户关注的专栏  
+@TODO
+
+### topic
+用户关注的话题信息  
+@TODO
 
 
 
