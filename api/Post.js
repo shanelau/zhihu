@@ -8,7 +8,7 @@
  */
 
 var Promise = require('bluebird'),
-    request = Promise.promisify(require("request")),
+    request = require("request"),
     config  = require('./config'),
     url     = require('url'),
     User    = require('./User'),
@@ -66,8 +66,22 @@ var info = function (postUrl) {
         });
     });
 }
-
+var page = function(name,options){
+    var data = {
+        url: _.template(config.post.page,{name:name}),
+        qs:{
+            limit: options.limit || 10,
+            offset: options.offset || 10
+        }
+    }
+    return new Promise(function (resolve, reject) {
+        request(data, function (err, res, body) {
+            resolve(JSON.parse(body));
+        });
+    });
+}
 module.exports = {
     likersDetail: likersDetail,
-    info: info
+    info: info,
+    page: page
 };

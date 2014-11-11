@@ -8,9 +8,11 @@
  */
 module.exports = {
     zhihu : 'http://www.zhihu.com',
+    zhuanlan: 'http://zhuanlan.zhihu.com/',
     post:{
         info: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
         like: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
+        page: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts'
     },
     answer: {
         likers: 'http://www.zhihu.com/node/AnswerFullVoteInfoV2'

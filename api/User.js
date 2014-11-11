@@ -45,6 +45,25 @@ var getUserByName = function (name){
         return result;
     });
 }
+
+var questions = function(qID){
+
+}
+var answers = function(qID){
+
+}
+var zhuanlansFocus = function(){
+
+}
+var topic = function(){
+
+}
+
 module.exports = {
-    getUserByName: getUserByName
+    getUserByName: getUserByName,
+    zhuanlansFocus: zhuanlansFocus,
+    question:questions,
+    answers: answers,
+    topic: topic
+
 }
