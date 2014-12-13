@@ -64,7 +64,7 @@ zhihu.User.getUserByName(name).then(function(user){
 ### Post.info(postUrl)
 获取专栏文章的详细信息
 
-* `postUrl`  文章的url地址    
+* `postUrl`  文章的url地址
 
 
 
@@ -79,7 +79,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
 * Object
 
-[example](http://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136) 
+[example](http://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136)
 
 ### Post.page(name,options)
 获取专栏文章列表
@@ -89,7 +89,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
    ```
      {
-             limit: 10   //记录数 
+             limit: 10   //记录数
              offset: 10  // 偏移量
      }
    ```
@@ -115,15 +115,54 @@ zhihu.Post.info(postUrl).then(function(data){
 * `{Array}`   //User
 
 
+### Post.zhuanlanInfo(name)
+获取专栏的信息
+
+* `name`  专栏的名字，比如 `bigertech`  
+
+**Result**  
+
+```
+{ followersCount: 22614,
+  description: '',
+  creator:
+  { bio: '魅族营销中心招募设计师',
+  hash: '29c3654588fd4246bb90cbd345242d65',
+  description: '',
+  profileUrl: 'http://www.zhihu.com/people/linan',
+  avatar:
+  { id: '24f3a654b',
+  template: 'http://pic2.zhimg.com/{id}_{size}.jpg' },
+  slug: 'linan',
+  name: '李楠' },
+  topics: [],
+  href: '/api/columns/bigertech',
+  acceptSubmission: true,
+  slug: 'bigertech',
+  name: '笔戈科技',
+  url: '/bigertech',
+  avatar:
+  { id: 'a4bf61d95',
+  template: 'http://pic3.zhimg.com/{id}_{size}.jpg' },
+  commentPermission: 'anyone',
+  following: false,
+  postsCount: 173,
+  canPost: false,
+  activateAuthorRequested: false }
+```
+
+* `{Array}`   //User
+
+
 ## 答案 Answer
 ### likers
 获取答案的点赞者  
-@TODO 
+@TODO
 
 ## 问题API--Question
 ### focus
 问题的关注列表  
-@TODO 
+@TODO
 
 ### collection
 问题的收藏列表
@@ -148,8 +187,3 @@ zhihu.Post.info(postUrl).then(function(data){
 ### topic
 用户关注的话题信息  
 @TODO
-
-
-
-
-

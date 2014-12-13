@@ -1,25 +1,22 @@
 {
-  "name": "zhihu",
-  "preferGlobal": "true",
-  "version": "0.0.3",
-  "author": "shanelau <shanelau@gmail.com>",
-  "description": "zhihu api ,获取知乎平台信息数据的接口",
-  "scripts": {
-    "start": "node index",
-    "test": "mocha"
-  },
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  },
-  "dependencies": {
-    "async": "*",
-    "bluebird": "*",
-    "cheerio": "^0.17.0",
-    "lodash": "*",
-    "request": "*"
-  },
-  "devDependencies": {
-    "should": "^4.3.0"
-  }
+    "name": "zhihu",
+    "preferGlobal": "true",
+    "version": "0.0.6",
+    "author": "shanelau <shanelau@gmail.com>",
+    "description": "zhihu api ,获取知乎平台信息数据的接口",
+    "main": "index.js",
+    "engines": {
+        "node": "0.10.x",
+        "npm": "1.2.x"
+    },
+    "dependencies": {
+        "async": "*",
+        "bluebird": "*",
+        "cheerio": "^0.17.0",
+        "lodash": "*",
+        "request": "*"
+    },
+    "devDependencies": {
+        "should": "^4.3.0"
+    }
 }

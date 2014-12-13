@@ -7,12 +7,13 @@
  *
  */
 module.exports = {
-    zhihu : 'http://www.zhihu.com',
+    zhihu: 'http://www.zhihu.com',
     zhuanlan: 'http://zhuanlan.zhihu.com/',
-    post:{
+    post: {
         info: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
         like: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
-        page: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts'
+        page: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts',
+        zhuanlan: 'http://zhuanlan.zhihu.com/api/columns/'
     },
     answer: {
         likers: 'http://www.zhihu.com/node/AnswerFullVoteInfoV2'
