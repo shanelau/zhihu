@@ -67,7 +67,11 @@ var info = function(postUrl) {
     };
     return new Promise(function(resolve, reject) {
         request(options, function(err, res, body) {
-            resolve(JSON.parse(body));
+            try {
+                resolve(JSON.parse(body));
+            } catch (e) {
+                reject("JSON parse error!");
+            }
         });
     });
 }
@@ -83,7 +87,11 @@ var page = function(name, options) {
     }
     return new Promise(function(resolve, reject) {
         request(data, function(err, res, body) {
-            resolve(JSON.parse(body));
+            try {
+                resolve(JSON.parse(body));
+            } catch (e) {
+                reject("JSON  string parse error!");
+            }
         });
     });
 }
@@ -95,7 +103,11 @@ var zhuanlanInfo = function(zhuanlan_name) {
     };
     return new Promise(function(resolve, reject) {
         request(options, function(err, res, body) {
-            resolve(JSON.parse(body));
+            try {
+                resolve(JSON.parse(body));
+            } catch (e) {
+                reject("JSON string parse error!");
+            }
         });
     });
 
