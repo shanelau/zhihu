@@ -6,7 +6,7 @@
     "description": "zhihu api ,获取知乎平台信息数据的接口",
     "main": "index.js",
     "engines": {
-        "node": "0.10.x",
+        "node": "0.10.x"
     },
     "dependencies": {
         "async": "*",
