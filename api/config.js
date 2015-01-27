@@ -9,6 +9,7 @@
 module.exports = {
     zhihu: 'http://www.zhihu.com',
     zhuanlan: 'http://zhuanlan.zhihu.com/',
+    topic_url:  "http://www.zhihu.com/topic/",
     post: {
         info: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
         like: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',

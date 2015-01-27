@@ -27,7 +27,6 @@ describe('Post', function() {
         it('should return zhuanlan info object', function(done) {
             var name = 'bigertech';
             Post.zhuanlanInfo(name).then(function(data) {
-                console.log(data);
                 Object.keys(data).length.should.above(0);
                 done();
             }).catch(function(err) {

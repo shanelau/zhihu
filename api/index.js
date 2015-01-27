@@ -8,9 +8,11 @@
  */
 var Post = require('./Post'),
     User = require('./User');
+    Topic = require('./Topic');
 
 
 module.exports = {
     Post: Post,
-    User: User
+    User: User,
+    Topic: Topic
 }
