@@ -188,7 +188,7 @@ zhihu.Post.info(postUrl).then(function(data){
 用户关注的话题信息  
 @TODO
 
-## 话题API
+## 话题API - Topic
 
 ### Topic.getTopicByID(topicID[, page])
 根据话题id获取该话题下的问题，话题id为唯一标识，参见话题的url
@@ -214,9 +214,9 @@ zhihu.Post.info(postUrl).then(function(data){
   * `page` 当前页数
   * `totalPage` 该话题下问题总页数
   * `questions` 当页问题
-      -    title: 问题名字
-      -    url: 问题链接
-      -    postTime: 问题最近更新时间
+      -    `title` 问题名字
+      -    `url` 问题链接
+      -    `postTime` 问题最近更新时间
 
 
 ```
