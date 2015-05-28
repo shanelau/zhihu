@@ -9,10 +9,10 @@
 
 var Promise = require('bluebird'),
     request = require("request"),
-    config = require('./config'),
-    url = require('url'),
-    User = require('./User'),
-    _ = require('lodash');
+    config  = require('./config'),
+    url     = require('url'),
+    User    = require('./User'),
+    _       = require('lodash');
 
 function getRealUrl(apiUrl, postUrl) {
     var pathname = url.parse(postUrl).pathname;

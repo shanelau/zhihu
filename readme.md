@@ -19,15 +19,16 @@ zhihu.User.getUserByName(name).then(function(user){
 });
 ```
 
+===
 
-
-##用户 API
+##用户 User API
 ### User.getUserByName(username)
-根据用户名获取到用户的信息，用户名为用的唯一标识，参见个人主页的url,或者设置中的个性网站  
+根据用户名获取到用户的信息，用户名为用的唯一标识，参见个人主页的url，或者设置中的个性网站  
 
 * `username`  //用户位置标识
 
-**Example**  
+**Example** 
+ 
 请求这个用户：[http://www.zhihu.com/people/shanelau1021](http://www.zhihu.com/people/shanelau1021)  
 `name` 为 `shanelau1021`
 
@@ -59,8 +60,9 @@ zhihu.User.getUserByName(name).then(function(user){
 
 ```
 
+===
 
-##专栏文章--Post
+##专栏文章 Post API
 ### Post.info(postUrl)
 获取专栏文章的详细信息
 
@@ -153,13 +155,16 @@ zhihu.Post.info(postUrl).then(function(data){
 
 * `{Array}`   //User
 
+===
 
-## 答案 Answer
+## 答案 Answer API
 ### likers
 获取答案的点赞者  
 @TODO
 
-## 问题API--Question
+===
+
+## 问题 Question API
 ### focus
 问题的关注列表  
 @TODO
@@ -188,7 +193,9 @@ zhihu.Post.info(postUrl).then(function(data){
 用户关注的话题信息  
 @TODO
 
-## 话题API - Topic
+***
+
+## 话题 Topic API
 
 ### Topic.getTopicByID(topicID[, page])
 根据话题id获取该话题下的问题，话题id为唯一标识，参见话题的url
@@ -196,11 +203,11 @@ zhihu.Post.info(postUrl).then(function(data){
 
 **Example**  
 
-请求这个话题：[生活、艺术、文化与活动]( http://www.zhihu.com/topic/19791501/questions)  
-`topicID` 为 `19791501`
+请求这个话题：[生活、艺术、文化与活动]( http://www.zhihu.com/topic/19778317/questions)  
+`topicID` 为 `19778317`
 
 
-    var topicID = '19791501';
+    var topicID = '19778317';
         zhihu.Topic.getTopicByID(topicID).then(function(result){
         console.log(result);
     });
