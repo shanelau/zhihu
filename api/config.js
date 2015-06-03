@@ -12,7 +12,7 @@ module.exports = {
     topic_url:  "http://www.zhihu.com/topic/",
     post: {
         info: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
-        like: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
+        likers: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
         page: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts',
         zhuanlan: 'http://zhuanlan.zhihu.com/api/columns/'
     },

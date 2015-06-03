@@ -65,5 +65,4 @@ module.exports = {
     question:questions,
     answers: answers,
     topic: topic
-
 }
