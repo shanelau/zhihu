@@ -7,19 +7,19 @@
  *
  */
 module.exports = {
-    zhihu: 'http://www.zhihu.com',
-    zhuanlan: 'http://zhuanlan.zhihu.com/',
-    topic_url:  "http://www.zhihu.com/topic/",
-    post: {
-        info: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
-        likers: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
-        page: 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts',
-        zhuanlan: 'http://zhuanlan.zhihu.com/api/columns/'
-    },
-    answer: {
-        likers: 'http://www.zhihu.com/node/AnswerFullVoteInfoV2'
-    },
-    user: {
-        info: 'http://www.zhihu.com/node/MemberProfileCardV2'
-    }
+  zhihu    : 'http://www.zhihu.com',
+  zhuanlan : 'http://zhuanlan.zhihu.com/',
+  topic_url: "http://www.zhihu.com/topic/",
+  post     : {
+    info    : 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%= postID%>',
+    likers  : 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts/<%=postID%>/likers',
+    page    : 'http://zhuanlan.zhihu.com/api/columns/<%=name %>/posts',
+    zhuanlan: 'http://zhuanlan.zhihu.com/api/columns/'
+  },
+  answer   : {
+    likers: 'http://www.zhihu.com/node/AnswerFullVoteInfoV2'
+  },
+  user     : {
+    info: 'http://www.zhihu.com/node/MemberProfileCardV2'
+  }
 }
