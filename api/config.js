@@ -21,5 +21,9 @@ module.exports = {
   },
   user     : {
     info: 'http://www.zhihu.com/node/MemberProfileCardV2'
+  },
+  collection: {
+    // full url: http://www.zhihu.com/collection/25547043?page=1
+    url: 'http://www.zhihu.com/collection/'
   }
 }
