@@ -18,19 +18,22 @@ function getItems(body) {
   var $ = cheerio.load(body);
   var allZM_Item =  $('.zm-item');
   var items = [];
-  var pages =  $('.zm-invite-pager span').eq(-2).text();
-  var currentPage =  $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
   allZM_Item.each(function (index, element) {
     var h2 = $(element).find('h2.zm-item-title a');
     var href = h2.attr('href') || '';
     var content = $(element).find('div.zm-item-fav div');
     var user = content.find('.answer-head .zm-item-answer-author-wrap');
-
+    var answerID = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-aid'));
+    var atoken = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-atoken'));
+    var html = $(element).find('textarea.content').html();
     var item = {
-      voter: $(element).find('.zm-item-vote a.zm-item-vote-count').text(),
+      aid: answerID,
+      voter: parseInt($(element).find('.zm-item-vote a.zm-item-vote-count').text()),
       desc: content.find('div.zh-summary.summary').text(),
+      content: html,
+      atoken: atoken,
       question: {
-        id: href.match(/\d*?$/)[0],
+        id: parseInt(href.match(/\d*?$/)[0]),
         title: h2.text(),
         url: config.zhihu + h2.attr('href')
       },
@@ -42,13 +45,7 @@ function getItems(body) {
     };
     items.push(item);
   });
-  return {
-    items: items,
-    pagination: {
-      pages: pages,
-      current: currentPage
-    }
-  };
+  return items;
 }
 
 /**
@@ -110,8 +107,8 @@ function getAllPageData(url) {
     return Promise.map(pages, function (page) {
       var pageUrl = realUrl + '?page=' + page;
       return getDataByPage(pageUrl).then(function(items){
-        console.log('page %d finished! %d', page, items.items.length);
-        allItems = allItems.concat(items.items);
+       console.log('page %d finished! %d', page, items.length);
+        allItems = allItems.concat(items);
         return ;
       });
     },{concurrency: 5}).then(function(total){
@@ -121,10 +118,40 @@ function getAllPageData(url) {
     return allItems;
   });
 }
-//getAllPageData('http://www.zhihu.com/collection/25547043?page=1');
+
+function getCollectionInfo(url){
+  if (url.indexOf(urlConfig.collection.url) < 0) {
+    throw new Error('Url not match!');
+  }
+  var cid = parseInt(url.match(/\d+/)[0]);
+  var options = {
+    url: url,
+    headers: config.headers
+  };
+  return request(options).then(function(body) {
+    var $ = cheerio.load(body[1]);
+    var title =  $('#zh-fav-head-title').text();
+    var $user = $('#zh-single-answer-author-info .zm-list-content-title a');
+    var user = {
+      img: $('a.zm-list-avatar-link .zm-list-avatar-medium').attr('src'),
+      name: $user.text(),
+      url: $user.attr('href')
+    };
+    return {
+      cid: cid,
+      title: title,
+      user: user
+    }
+  });
+}
+
+getDataByPage('http://www.zhihu.com/collection/25547043?page=1').then(function(data){
+    console.log(data[0].atoken);
+});
 
 module.exports = {
   getAllPageData: getAllPageData,
   getDataByPage: getDataByPage,
-  getPagination: getPagination
+  getPagination: getPagination,
+  getCollectionInfo: getCollectionInfo
 };
