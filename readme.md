@@ -13,13 +13,24 @@ var zhihu = require('zhihu');
 获取用户的信息  
 
 ```
-var username = 'shanelau1021';
+var username = 'shanejs';
 zhihu.User.getUserByName(name).then(function(user){
     console.log(user);
 });
 ```
 
+结果
 
+```
+
+{ answer: 14,
+  post: 0,
+  follower: 529,
+  profileUrl: 'http://www.zhihu.com/people/shanejs',
+  name: '狂飙蜗牛',
+  sex: 'male' }
+
+```
 
 ##用户 User API
 ### User.getUserByName(username)
