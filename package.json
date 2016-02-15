@@ -1,12 +1,12 @@
 {
     "name": "zhihu",
     "preferGlobal": "true",
-    "version": "0.0.9",
+    "version": "0.0.21",
     "author": "kissliux <shanelau1021@gmail.com>",
     "description": "zhihu api ,获取知乎平台信息数据的接口",
     "main": "index.js",
     "engines": {
-        "node": "0.10.x"
+        "node": " >0.10.x"
     },
     "dependencies": {
         "async": "*",
