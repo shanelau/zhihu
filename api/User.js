@@ -6,8 +6,10 @@
  * @description
  *
  */
+'use strict';
+
 var Promise = require('bluebird'),
-request     = Promise.promisify(require("request")),
+request     = Promise.promisify(require('request')),
 cheerio     = require('cheerio'),
 config      = require('./config'),
 url         = require('url'),
@@ -17,20 +19,20 @@ function formatFollowData(str) {
   if (str.indexOf('K') !== -1) {
     return parseInt(str) * 1000;
   }
-  if (str.indexOf('K') !== -1) {
-    return parseInt(str) * 10000;
-  }
+  // if (str.indexOf('K') !== -1) {
+  //   return parseInt(str) * 10000;
+  // }
   return parseInt(str);
 }
 var getUserByName = function (name) {
   var data = {
     url: config.user.info,
     qs : {
-      params: JSON.stringify({url_token: name})
+      params: JSON.stringify({'url_token': name})
     }
   };
   return request(data).then(function (content) {
-    var responseBody = content[0].body;
+    var responseBody = content.body;
     var $ = cheerio.load(responseBody);
     var values = $("span.value");
     var result = {
