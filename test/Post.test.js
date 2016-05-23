@@ -10,29 +10,29 @@ var Post = require('../').Post;
 var should = require('should');
 
 describe('Post', function () {
-    describe('#info', function () {
-        it('should return post info object', function (done) {
-            var postUrl = 'https://zhuanlan.zhihu.com/p/19888522';
-            Post.info(postUrl).then(function (data) {
-                Object.keys(data).length.should.above(0);
-                done();
-              }).catch(function (err) {
-                console.error(err);
-              });
-
-          });
+  describe('#info', function () {
+    it('should return post info object', function (done) {
+      var postUrl = 'https://zhuanlan.zhihu.com/p/19888522';
+      Post.info(postUrl).then(function (data) {
+        Object.keys(data).length.should.above(0);
+        done();
+      }).catch(function (err) {
+        console.error(err);
       });
 
-    describe('#zhuanlan', function () {
-        it('should return zhuanlan info object', function (done) {
-            var name = 'bigertech';
-            Post.zhuanlanInfo(name).then(function (data) {
-                Object.keys(data).length.should.above(0);
-                done();
-              }).catch(function (err) {
-                console.error(err);
-              });
-
-          });
-      });
+    });
   });
+
+  describe('#zhuanlan', function () {
+    it('should return zhuanlan info object', function (done) {
+      var name = 'bigertech';
+      Post.zhuanlanInfo(name).then(function (data) {
+        Object.keys(data).length.should.above(0);
+        done();
+      }).catch(function (err) {
+        console.error(err);
+      });
+
+    });
+  });
+});

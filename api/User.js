@@ -11,10 +11,10 @@
 const Promise = require('bluebird');
 const request = Promise.promisify(require('request'));
 const cheerio = require('cheerio');
-const config  = require('../config');
-const API  = require('../config/api');
-const url     = require('url');
-const _       = require('lodash');
+const config = require('../config');
+const API = require('../config/api');
+const url = require('url');
+const _ = require('lodash');
 
 function formatFollowData(str) {
   if (str.indexOf('K') !== -1) {
@@ -31,7 +31,7 @@ var getUserByName = function (name) {
   var data = {
     url: API.user.info,
     qs: {
-      params: JSON.stringify({ url_token: name }),
+      params: JSON.stringify({url_token: name}),
     },
   };
   return request(data).then(function (content) {

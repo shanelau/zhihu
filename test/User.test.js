@@ -23,7 +23,7 @@ describe('User', function () {
     });
 
     /*
-    Followers: '294K' should be 294000
+     Followers: '294K' should be 294000
      */
     it('should recongize users followed by thousands', function (done) {
       var name = 'fenng';

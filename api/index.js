@@ -7,8 +7,8 @@
  *
  */
 var Post = require('./Post');
-var User     = require('./User');
-var Collection     = require('./Collection');
+var User = require('./User');
+var Collection = require('./Collection');
 Topic = require('./Topic');
 
 module.exports = {

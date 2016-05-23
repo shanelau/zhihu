@@ -282,7 +282,8 @@ Collection.getDataByPage(url);
 
 ```
 
-## 共享者
+## 贡献者
+
 
 
 ## 更新记录

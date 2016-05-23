@@ -3,11 +3,12 @@
   "preset": "airbnb",
   "fix": true,
   "maxErrors": 50,
-  "fileExtensions": [".js", ".jsx"],
+  "fileExtensions": [
+    ".js",
+    ".jsx"
+  ],
   "excludeFiles": [],
-
   // 改变 requireCurlyBraces 规则
   //"requireCurlyBraces": null // or false
   "requireDollarBeforejQueryAssignment": false
-
 }

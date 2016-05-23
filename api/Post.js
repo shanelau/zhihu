@@ -9,11 +9,11 @@
 'use strict';
 
 const Promise = require('bluebird');
-const request     = require('request');
+const request = require('request');
 const API = require('../config/api');
-const url         = require('url');
-const User        = require('./User');
-const _           = require('lodash');
+const url = require('url');
+const User = require('./User');
+const _ = require('lodash');
 
 function getRealUrl(apiUrl, postUrl) {
   var pathname = url.parse(postUrl).pathname;
