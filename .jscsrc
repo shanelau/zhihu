@@ -1,0 +1,13 @@
+{
+  // 使用 jquery 编码风格规范
+  "preset": "airbnb",
+  "fix": true,
+  "maxErrors": 50,
+  "fileExtensions": [".js", ".jsx"],
+  "excludeFiles": [],
+
+  // 改变 requireCurlyBraces 规则
+  //"requireCurlyBraces": null // or false
+  "requireDollarBeforejQueryAssignment": false
+
+}

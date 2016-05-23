@@ -8,37 +8,40 @@
  */
 'use strict';
 
-var Promise = require('bluebird'),
-request     = Promise.promisify(require('request')),
-cheerio     = require('cheerio'),
-config      = require('./config'),
-url         = require('url'),
-_           = require('lodash');
+const Promise = require('bluebird');
+const request = Promise.promisify(require('request'));
+const cheerio = require('cheerio');
+const config  = require('../config');
+const API  = require('../config/api');
+const url     = require('url');
+const _       = require('lodash');
 
 function formatFollowData(str) {
   if (str.indexOf('K') !== -1) {
     return parseInt(str) * 1000;
   }
+
   // if (str.indexOf('K') !== -1) {
   //   return parseInt(str) * 10000;
   // }
   return parseInt(str);
 }
+
 var getUserByName = function (name) {
   var data = {
-    url: config.user.info,
-    qs : {
-      params: JSON.stringify({'url_token': name})
-    }
+    url: API.user.info,
+    qs: {
+      params: JSON.stringify({ url_token: name }),
+    },
   };
   return request(data).then(function (content) {
-    var responseBody = content.body;
+    var responseBody = content[0].body;
     var $ = cheerio.load(responseBody);
-    var values = $("span.value");
+    var values = $('span.value');
     var result = {
-      answer  : formatFollowData(values.eq(0).text()),
-      post    : formatFollowData(values.eq(1).text()),
-      follower: formatFollowData(values.eq(2).text())
+      answer: formatFollowData(values.eq(0).text()),
+      post: formatFollowData(values.eq(1).text()),
+      follower: formatFollowData(values.eq(2).text()),
     };
     result.profileUrl = config.zhihu + $('a.avatar-link').attr('href');
     result.name = $('span.name').text();
@@ -46,25 +49,28 @@ var getUserByName = function (name) {
     result.sex = male.length === 1 ? 'female' : 'male';
     return result;
   });
-}
+};
 
 var questions = function (qID) {
 
-}
+};
+
 var answers = function (qID) {
 
-}
+};
+
 var zhuanlansFocus = function () {
 
-}
+};
+
 var topic = function () {
 
-}
+};
 
 module.exports = {
-  getUserByName : getUserByName,
+  getUserByName: getUserByName,
   zhuanlansFocus: zhuanlansFocus,
-  question      : questions,
-  answers       : answers,
-  topic         : topic
-}
+  question: questions,
+  answers: answers,
+  topic: topic,
+};
