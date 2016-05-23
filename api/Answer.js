@@ -7,20 +7,20 @@
  *
  */
 var Promise = require('bluebird'),
-    request = require("request"),
-    config  = require('./config'),
-    url     = require('url'),
-    User    = require('./User'),
-    _       = require('lodash');
+request     = require("request"),
+config      = require('./config'),
+url         = require('url'),
+User        = require('./User'),
+_           = require('lodash');
 
 /**
  * @TODO
  * @param answerUrl 答案的URL
  */
-var likers = function(answerUrl){
+var likers = function (answerUrl) {
 
 }
 
 module.exports = {
-    likers: likers
+  likers: likers
 }

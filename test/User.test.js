@@ -12,9 +12,9 @@ var should = require('should');
 describe('User',function(){
     describe('#info',function(){
         it('should return user info object',function(done){
-            var name = 'shanelau1021';
+            var name = 'shanejs';
             User.getUserByName(name).then(function(data){
-//              console.log(data);
+              console.log(data);
                 Object.keys(data).length.should.above(0);
                 done();
             });
