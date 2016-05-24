@@ -1,42 +1,38 @@
-# 知乎数据API 接口  node.js
-======
+# 知乎数据 API 接口 (node.js)
 
-> 知乎已经更新为 https, 本项目 < 1.0.0 不能再使用了. 请升级
+> 知乎已经更新为 https, 本项目 \< 1.0.0 不能再使用了. 请升级
 
-根据这些接口获取到知乎的数据，包括用户、问答、专栏、话题信息
+根据这些接口获取到知乎的数据，包括以下接口：
+* [用户 User API][1]
+* [专栏文章 Post API][2]
+* [答案 Answer API][3]
+* [问题 Question API][4]
+* [话题 Topic API][5]
 
 **欢迎贡献代码，一起完善知乎的接口**
 
-
 ## 快速开始
 
-```
-var zhihu = require('zhihu');
-```
-## demo
-获取用户的信息  
+	var zhihu = require('zhihu');
 
-```
-var username = 'shanejs';
-zhihu.User.getUserByName(name).then(function(user){
-    console.log(user);
-});
-```
+## demo
+获取用户的信息
+
+	var username = 'shanejs';
+	zhihu.User.getUserByName(name).then(function(user){
+	  console.log(user);
+	});
 
 结果
 
-```
+	{ answer: 14,
+	 post: 0,
+	 follower: 529,
+	 profileUrl: 'https://www.zhihu.com/people/shanejs',
+	 name: '狂飙蜗牛',
+	 sex: 'male' }
 
-{ answer: 14,
-  post: 0,
-  follower: 529,
-  profileUrl: 'https://www.zhihu.com/people/shanejs',
-  name: '狂飙蜗牛',
-  sex: 'male' }
-
-```
-
-##用户 User API
+## 用户 User API
 ### User.getUserByName(username)
 根据用户名获取到用户的信息，用户名为用的唯一标识，参见个人主页的url，或者设置中的个性网站  
 
@@ -44,16 +40,14 @@ zhihu.User.getUserByName(name).then(function(user){
 
 **Example** 
  
-请求这个用户：[https://www.zhihu.com/people/shanelau1021](http://www.zhihu.com/people/shanelau1021)  
+请求这个用户：[https://www.zhihu.com/people/shanelau1021][6]  
 `name` 为 `shanelau1021`
 
-```
-var nam = 'shanelau1021';
-zhihu.User.getUserByName(name).then(function(user){
-    console.log(user);
-});
+	var nam = 'shanelau1021';
+	zhihu.User.getUserByName(name).then(function(user){
+	  console.log(user);
+	});
 
-```
 **Result**
 
 参数说明
@@ -65,7 +59,7 @@ zhihu.User.getUserByName(name).then(function(user){
 * `name` 名字
 * `sex`性别
 
-```
+\`\`\`
 { answer: 5,
   post: 0,
   follower: 456,
@@ -73,10 +67,10 @@ zhihu.User.getUserByName(name).then(function(user){
   name: '狂飙蜗牛',
   sex: 'male' }
 
-```
+\`\`\`
 
 
-##专栏文章 Post API
+## 专栏文章 Post API
 ### Post.info(postUrl)
 获取专栏文章的详细信息
 
@@ -86,16 +80,16 @@ zhihu.User.getUserByName(name).then(function(user){
 
 **Example**
 
-```
+\`\`\`
 zhihu.Post.info(postUrl).then(function(data){
 	//do something
 });
-```
-** Result **  
+\`\`\`
+\*\* Result \*\*  
 
 * Object
 
-[example](https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136)
+[example][7]
 
 ### Post.page(name,options)
 获取专栏文章列表
@@ -103,16 +97,16 @@ zhihu.Post.info(postUrl).then(function(data){
 * `name` 专栏的英文名字， 例如：'bigertech'
 *  `options`  {object}  ,默认值为10
 
-   ```
-     {
-             limit: 10   //记录数
-             offset: 10  // 偏移量
-     }
-   ```
+   \`\`\`
+	 {
+	         limit: 10   //记录数
+	         offset: 10  // 偏移量
+	 }
+   \`\`\`
 
 **Example**
 
-[demo](https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10)
+[demo][8]
 
 
 
@@ -122,7 +116,7 @@ zhihu.Post.info(postUrl).then(function(data){
 ### Post.likersDetail(postUrl)
 获取文章的点赞者的详细信息
 
-* `postUrl`  文章的url地址  
+* `postUrl`  文章的url地址
 
 **Result**  
 
@@ -134,11 +128,11 @@ zhihu.Post.info(postUrl).then(function(data){
 ### Post.zhuanlanInfo(name)
 获取专栏的信息
 
-* `name`  专栏的名字，比如 `bigertech`  
+* `name`  专栏的名字，比如 `bigertech`
 
 **Result**  
 
-```
+\`\`\`
 { followersCount: 22614,
   description: '',
   creator:
@@ -148,7 +142,7 @@ zhihu.Post.info(postUrl).then(function(data){
   profileUrl: 'http://www.zhihu.com/people/linan',
   avatar:
   { id: '24f3a654b',
-  template: 'http://pic2.zhimg.com/{id}_{size}.jpg' },
+  template: 'http://pic2.zhimg.com/{id}\_{size}.jpg' },
   slug: 'linan',
   name: '李楠' },
   topics: [],
@@ -159,24 +153,23 @@ zhihu.Post.info(postUrl).then(function(data){
   url: '/bigertech',
   avatar:
   { id: 'a4bf61d95',
-  template: 'http://pic3.zhimg.com/{id}_{size}.jpg' },
+  template: 'http://pic3.zhimg.com/{id}\_{size}.jpg' },
   commentPermission: 'anyone',
   following: false,
   postsCount: 173,
   canPost: false,
   activateAuthorRequested: false }
-```
+\`\`\`
 
 * `{Array}`   //User
 
 
 
 ## 答案 Answer API
-### likers
-获取答案的点赞者  
-@TODO
+### getVotersById(string answerId)
+用 answerId 请求这个回答的点赞者。不同于 url 中显而易见的 "/question/numbers/answer/othernumbers/" 的数字，answerId 是相对隐含的。比如 "/question/28207685/answer/39974928"，这个回答的 answerId 应为 "11382008", 可以在 DOM tree 中找到。具体的对应关系正在探索。
 
-
+@TODO 实现知乎支持的更多参数，比如 offset 等
 
 ## 问题 Question API
 ### focus
@@ -191,28 +184,28 @@ zhihu.Post.info(postUrl).then(function(data){
 #### getAllPageData
 获取所有的页面数据,遍历所有的页面
 
-```
+\`\`\`
 Collection.getAllPageData(url);
-```
+\`\`\`
 
 #### getDataByPage,
 获取某一页的页面数据
 
-```
+\`\`\`
 
 var url = 'http://www.zhihu.com/collection/25547043?page=1';
 Collection.getDataByPage(url);
-```
+\`\`\`
 
 #### getPagination
 获取改收藏列表的分页信息
 
-```
+\`\`\`
 {
   pages: 总页数，
   current： 当前页面
 }
-```
+\`\`\`
 
 
 ### info
@@ -246,14 +239,14 @@ Collection.getDataByPage(url);
 
 **Example**  
 
-请求这个话题：[生活、艺术、文化与活动]( http://www.zhihu.com/topic/19778317/questions)  
+请求这个话题：[生活、艺术、文化与活动][9]  
 `topicID` 为 `19778317`
 
 
-    var topicID = '19778317';
-        zhihu.Topic.getTopicByID(topicID).then(function(result){
-        console.log(result);
-    });
+	var topicID = '19778317';
+	    zhihu.Topic.getTopicByID(topicID).then(function(result){
+	    console.log(result);
+	});
 
 
   **Result**
@@ -264,13 +257,13 @@ Collection.getDataByPage(url);
   * `page` 当前页数
   * `totalPage` 该话题下问题总页数
   * `questions` 当页问题
-      -    `title` 问题名字
-      -    `url` 问题链接
-      -    `postTime` 问题最近更新时间
+	  -    `title` 问题名字
+	  -    `url` 问题链接
+	  -    `postTime` 问题最近更新时间
 
 
 ```
-
+`
   { name: '生活、艺术、文化与活动',
   page: 1,
   totalPage: 47242,
@@ -285,12 +278,10 @@ Collection.getDataByPage(url);
   postTime: '5 分钟前' } } }
 
 ```
-
+`
 ## 贡献者
 1. shanelau
-2. iplus26
-3. van Jiang
-
+2. Ivan Jiang (iplus26)
 
 ## 更新记录
 #### 2016.5.23
@@ -301,3 +292,13 @@ Collection.getDataByPage(url);
 #### 2015.10.15
 1. 新增收藏列表的数据抓取
 2. 查询某个收藏下的所有数据和分页数据
+
+[1]:	#%E7%94%A8%E6%88%B7-user-api
+[2]:	#%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0-post-api
+[3]:	#%E7%AD%94%E6%A1%88-answer-api
+[4]:	#%E9%97%AE%E9%A2%98-question-api
+[5]:	#%E8%AF%9D%E9%A2%98-topic-api
+[6]:	http://www.zhihu.com/people/shanelau1021
+[7]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136
+[8]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10
+[9]:	http://www.zhihu.com/topic/19778317/questions
