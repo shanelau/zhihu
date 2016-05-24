@@ -1,8 +1,12 @@
 # 知乎数据API 接口  node.js
 ======
+
+> 知乎已经更新为 https, 本项目 < 1.0.0 不能再使用了. 请升级
+
 根据这些接口获取到知乎的数据，包括用户、问答、专栏、话题信息
 
 **欢迎贡献代码，一起完善知乎的接口**
+
 
 ## 快速开始
 
@@ -26,7 +30,7 @@ zhihu.User.getUserByName(name).then(function(user){
 { answer: 14,
   post: 0,
   follower: 529,
-  profileUrl: 'http://www.zhihu.com/people/shanejs',
+  profileUrl: 'https://www.zhihu.com/people/shanejs',
   name: '狂飙蜗牛',
   sex: 'male' }
 
@@ -40,7 +44,7 @@ zhihu.User.getUserByName(name).then(function(user){
 
 **Example** 
  
-请求这个用户：[http://www.zhihu.com/people/shanelau1021](http://www.zhihu.com/people/shanelau1021)  
+请求这个用户：[https://www.zhihu.com/people/shanelau1021](http://www.zhihu.com/people/shanelau1021)  
 `name` 为 `shanelau1021`
 
 ```
@@ -65,7 +69,7 @@ zhihu.User.getUserByName(name).then(function(user){
 { answer: 5,
   post: 0,
   follower: 456,
-  profileUrl: 'http://www.zhihu.com/people/shanelau1021',
+  profileUrl: 'https://www.zhihu.com/people/shanelau1021',
   name: '狂飙蜗牛',
   sex: 'male' }
 
@@ -91,7 +95,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
 * Object
 
-[example](http://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136)
+[example](https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136)
 
 ### Post.page(name,options)
 获取专栏文章列表
@@ -108,7 +112,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
 **Example**
 
-[demo](http://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10)
+[demo](https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10)
 
 
 
@@ -282,7 +286,18 @@ Collection.getDataByPage(url);
 
 ```
 
+## 贡献者
+1. shanelau
+2. iplus26
+3. van Jiang
+
+
 ## 更新记录
+#### 2016.5.23
+1. 修复 https 问题
+2. 修改部分bug
+3. 加入 jscs 格式化代码风格
+
 #### 2015.10.15
 1. 新增收藏列表的数据抓取
 2. 查询某个收藏下的所有数据和分页数据

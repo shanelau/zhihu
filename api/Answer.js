@@ -6,12 +6,7 @@
  * @description
  *
  */
-var Promise = require('bluebird'),
-request     = require("request"),
-config      = require('./config'),
-url         = require('url'),
-User        = require('./User'),
-_           = require('lodash');
+const Promise = require('bluebird');
 
 /**
  * @TODO
@@ -19,8 +14,8 @@ _           = require('lodash');
  */
 var likers = function (answerUrl) {
 
-}
+};
 
 module.exports = {
-  likers: likers
-}
+  likers: likers,
+};

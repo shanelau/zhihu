@@ -6,19 +6,20 @@
  * @description
  *
  */
+'use strict';
 
-var util = require('url');
-var config =require('../config');
-var urlConfig =require('./config');
-var cheerio = require('cheerio');
-var Promise = require('bluebird'),
-    request     = Promise.promisify(require("request"));
+const util = require('url');
+const config = require('../config');
+const API = require('../config/api');
+const cheerio = require('cheerio');
+const Promise = require('bluebird');
+const request = Promise.promisify(require('request'));
 
 function getItems(body) {
   var $ = cheerio.load(body);
-  var allZM_Item =  $('.zm-item');
+  var allZMItem = $('.zm-item');
   var items = [];
-  allZM_Item.each(function (index, element) {
+  allZMItem.each(function (index, element) {
     var h2 = $(element).find('h2.zm-item-title a');
     var href = h2.attr('href') || '';
     var content = $(element).find('div.zm-item-fav div');
@@ -35,16 +36,17 @@ function getItems(body) {
       question: {
         id: parseInt(href.match(/\d*?$/)[0]),
         title: h2.text(),
-        url: config.zhihu + h2.attr('href')
+        url: config.zhihu + h2.attr('href'),
       },
       user: {
         username: user.find('a').text(),
-        userTitle:  user.find('strong').text(),
-        url: user.find('a').attr('href')
-      }
+        userTitle: user.find('strong').text(),
+        url: user.find('a').attr('href'),
+      },
     };
     items.push(item);
   });
+
   return items;
 }
 
@@ -54,16 +56,15 @@ function getItems(body) {
  * @returns {*}
  */
 function getDataByPage(url) {
- // var obj = util.parse(url);
-  //console.log(obj);
-  if (url.indexOf(urlConfig.collection.url) < 0) {
+  if (url.indexOf(API.collection.url) < 0) {
     throw new Error('Url not match!');
   }
+
   var options = {
     url: url,
-    headers: config.headers
+    headers: config.headers,
   };
-  return request(options).then(function(body) {
+  return request(options).then(function (body) {
     return getItems(body[1]);
   });
 }
@@ -76,16 +77,16 @@ function getDataByPage(url) {
 function getPagination(url) {
   var options = {
     url: url,
-    headers: config.headers
+    headers: config.headers,
   };
-  return request(options).then(function(body) {
+  return request(options).then(function (body) {
     var $ = cheerio.load(body[1]);
-    var pages =  $('.zm-invite-pager span').eq(-2).text();
-    var currentPage =  $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
-    return  {
+    var pages = $('.zm-invite-pager span').eq(-2).text();
+    var currentPage = $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
+    return {
       pages: parseInt(pages),
-      current: parseInt(currentPage)
-    }
+      current: parseInt(currentPage),
+    };
   });
 }
 
@@ -99,59 +100,57 @@ function getAllPageData(url) {
   var formatUrl = util.parse(url);
   var realUrl = config.zhihu + formatUrl.pathname;
   var allItems = [];
-  return getPagination(url).then(function(paginations){
+  return getPagination(url).then(function (paginations) {
     var pages = [];
-    for(var i = 1; i <=  paginations.pages; i++ ){
+    for (var i = 1; i <= paginations.pages; i++) {
       pages.push(i);
     }
+
     return Promise.map(pages, function (page) {
       var pageUrl = realUrl + '?page=' + page;
-      return getDataByPage(pageUrl).then(function(items){
-       console.log('page %d finished! %d', page, items.length);
+      return getDataByPage(pageUrl).then(function (items) {
+        console.log('page %d finished! %d', page, items.length);
         allItems = allItems.concat(items);
-        return ;
+        return;
       });
-    },{concurrency: 5}).then(function(total){
+    }, {concurrency: 5}).then(function (total) {
       return total;
     });
-  }).then(function(){
+  }).then(function () {
     return allItems;
   });
 }
 
-function getCollectionInfo(url){
-  if (url.indexOf(urlConfig.collection.url) < 0) {
+function getCollectionInfo(url) {
+  if (url.indexOf(API.collection.url) < 0) {
     throw new Error('Url not match!');
   }
+
   var cid = parseInt(url.match(/\d+/)[0]);
   var options = {
     url: url,
-    headers: config.headers
+    headers: config.headers,
   };
-  return request(options).then(function(body) {
+  return request(options).then(function (body) {
     var $ = cheerio.load(body[1]);
-    var title =  $('#zh-fav-head-title').text();
+    var title = $('#zh-fav-head-title').text();
     var $user = $('#zh-single-answer-author-info .zm-list-content-title a');
     var user = {
       img: $('a.zm-list-avatar-link .zm-list-avatar-medium').attr('src'),
       name: $user.text(),
-      url: $user.attr('href')
+      url: $user.attr('href'),
     };
     return {
       cid: cid,
       title: title,
-      user: user
-    }
+      user: user,
+    };
   });
 }
-
-getDataByPage('http://www.zhihu.com/collection/25547043?page=1').then(function(data){
-    console.log(data[0].atoken);
-});
 
 module.exports = {
   getAllPageData: getAllPageData,
   getDataByPage: getDataByPage,
   getPagination: getPagination,
-  getCollectionInfo: getCollectionInfo
+  getCollectionInfo: getCollectionInfo,
 };

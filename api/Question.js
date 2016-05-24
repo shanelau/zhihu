@@ -12,7 +12,7 @@
  */
 var focus = function (qID) {
 
-}
+};
 /**
  * @TDOD
  * 获取收藏问题的用户列表
@@ -20,12 +20,14 @@ var focus = function (qID) {
  */
 var collection = function (qID) {
 
-}
+};
+
 var info = function () {
 
-}
+};
+
 module.exports = {
-  foucs     : focus,
-  info      : info,
-  collection: collection
-}
+  foucs: focus,
+  info: info,
+  collection: collection,
+};
