@@ -8,7 +8,7 @@
 
 var Promise = require('bluebird'),
   request = Promise.promisify(require('request')),
-  config = require('./config'),
+  config = require('../config/api'),
   url = require('url'),
   User = require('./User'),
   cheerio = require('cheerio'),

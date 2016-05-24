@@ -2,12 +2,16 @@
 
 > 知乎已经更新为 https, 本项目 \< 1.0.0 不能再使用了. 请升级
 
+[![][image-1]][1]
+
+[![][image-2]][2]
+
 根据这些接口获取到知乎的数据，包括以下接口：
-* [用户 User API][1]
-* [专栏文章 Post API][2]
-* [答案 Answer API][3]
-* [问题 Question API][4]
-* [话题 Topic API][5]
+* [用户 User API][3]
+* [专栏文章 Post API][4]
+* [答案 Answer API][5]
+* [问题 Question API][6]
+* [话题 Topic API][7]
 
 **欢迎贡献代码，一起完善知乎的接口**
 
@@ -40,7 +44,7 @@
 
 **Example** 
  
-请求这个用户：[https://www.zhihu.com/people/shanelau1021][6]  
+请求这个用户：[https://www.zhihu.com/people/shanelau1021][8]  
 `name` 为 `shanelau1021`
 
 	var nam = 'shanelau1021';
@@ -59,15 +63,12 @@
 * `name` 名字
 * `sex`性别
 
-\`\`\`
-{ answer: 5,
-  post: 0,
-  follower: 456,
-  profileUrl: 'https://www.zhihu.com/people/shanelau1021',
-  name: '狂飙蜗牛',
-  sex: 'male' }
-
-\`\`\`
+	{ answer: 5,
+	 post: 0,
+	 follower: 456,
+	 profileUrl: 'https://www.zhihu.com/people/shanelau1021',
+	 name: '狂飙蜗牛',
+	 sex: 'male' }
 
 
 ## 专栏文章 Post API
@@ -76,41 +77,33 @@
 
 * `postUrl`  文章的url地址
 
-
-
 **Example**
 
-\`\`\`
-zhihu.Post.info(postUrl).then(function(data){
-	//do something
-});
-\`\`\`
-\*\* Result \*\*  
+	zhihu.Post.info(postUrl).then(function(data){
+	  //do something
+	});
+
+**Result**  
 
 * Object
 
-[example][7]
+[example][9]
 
 ### Post.page(name,options)
 获取专栏文章列表
 
 * `name` 专栏的英文名字， 例如：'bigertech'
-*  `options`  {object}  ,默认值为10
+* `options`  {object}  ,默认值为10
 
-   \`\`\`
 	 {
-	         limit: 10   //记录数
-	         offset: 10  // 偏移量
+	   limit: 10   // 记录数
+	   offset: 10  // 偏移量
 	 }
-   \`\`\`
+
 
 **Example**
 
-[demo][8]
-
-
-
-
+[demo][10]
 
 
 ### Post.likersDetail(postUrl)
@@ -132,34 +125,32 @@ zhihu.Post.info(postUrl).then(function(data){
 
 **Result**  
 
-\`\`\`
-{ followersCount: 22614,
-  description: '',
-  creator:
-  { bio: '魅族营销中心招募设计师',
-  hash: '29c3654588fd4246bb90cbd345242d65',
-  description: '',
-  profileUrl: 'http://www.zhihu.com/people/linan',
-  avatar:
-  { id: '24f3a654b',
-  template: 'http://pic2.zhimg.com/{id}\_{size}.jpg' },
-  slug: 'linan',
-  name: '李楠' },
-  topics: [],
-  href: '/api/columns/bigertech',
-  acceptSubmission: true,
-  slug: 'bigertech',
-  name: '笔戈科技',
-  url: '/bigertech',
-  avatar:
-  { id: 'a4bf61d95',
-  template: 'http://pic3.zhimg.com/{id}\_{size}.jpg' },
-  commentPermission: 'anyone',
-  following: false,
-  postsCount: 173,
-  canPost: false,
-  activateAuthorRequested: false }
-\`\`\`
+	{ followersCount: 22614,
+	 description: '',
+	 creator:
+	 { bio: '魅族营销中心招募设计师',
+	 hash: '29c3654588fd4246bb90cbd345242d65',
+	 description: '',
+	 profileUrl: 'http://www.zhihu.com/people/linan',
+	 avatar:
+	 { id: '24f3a654b',
+	 template: 'http://pic2.zhimg.com/{id}\_{size}.jpg' },
+	 slug: 'linan',
+	 name: '李楠' },
+	 topics: \[],
+	 href: '/api/columns/bigertech',
+	 acceptSubmission: true,
+	 slug: 'bigertech',
+	 name: '笔戈科技',
+	 url: '/bigertech',
+	 avatar:
+	 { id: 'a4bf61d95',
+	 template: 'http://pic3.zhimg.com/{id}\_{size}.jpg' },
+	 commentPermission: 'anyone',
+	 following: false,
+	 postsCount: 173,
+	 canPost: false,
+	 activateAuthorRequested: false }
 
 * `{Array}`   //User
 
@@ -184,28 +175,21 @@ zhihu.Post.info(postUrl).then(function(data){
 #### getAllPageData
 获取所有的页面数据,遍历所有的页面
 
-\`\`\`
-Collection.getAllPageData(url);
-\`\`\`
+	Collection.getAllPageData(url);
 
 #### getDataByPage,
 获取某一页的页面数据
 
-\`\`\`
-
-var url = 'http://www.zhihu.com/collection/25547043?page=1';
-Collection.getDataByPage(url);
-\`\`\`
+	var url = 'http://www.zhihu.com/collection/25547043?page=1';
+	Collection.getDataByPage(url);
 
 #### getPagination
 获取改收藏列表的分页信息
 
-\`\`\`
-{
-  pages: 总页数，
-  current： 当前页面
-}
-\`\`\`
+	{
+	 pages: 总页数，
+	 current： 当前页面
+	}
 
 
 ### info
@@ -239,7 +223,7 @@ Collection.getDataByPage(url);
 
 **Example**  
 
-请求这个话题：[生活、艺术、文化与活动][9]  
+请求这个话题：[生活、艺术、文化与活动][11]  
 `topicID` 为 `19778317`
 
 
@@ -262,23 +246,19 @@ Collection.getDataByPage(url);
 	  -    `postTime` 问题最近更新时间
 
 
-```
-`
-  { name: '生活、艺术、文化与活动',
-  page: 1,
-  totalPage: 47242,
-  questions:
-  { '0':
-  { title: '为什么很多人能接受有过长期恋爱经历，却不能接受有过婚姻的人？',
-  url: 'http://www.zhihu.com/question/27816723',
-  postTime: '41 秒前' },
-  '19':
-  { title: '360卫士在C盘为什么不可以删掉？',
-  url: 'http://www.zhihu.com/question/27816632',
-  postTime: '5 分钟前' } } }
+	 { name: '生活、艺术、文化与活动',
+	 page: 1,
+	 totalPage: 47242,
+	 questions:
+	 { '0':
+	 { title: '为什么很多人能接受有过长期恋爱经历，却不能接受有过婚姻的人？',
+	 url: 'http://www.zhihu.com/question/27816723',
+	 postTime: '41 秒前' },
+	 '19':
+	 { title: '360卫士在C盘为什么不可以删掉？',
+	 url: 'http://www.zhihu.com/question/27816632',
+	 postTime: '5 分钟前' } } }
 
-```
-`
 ## 贡献者
 1. shanelau
 2. Ivan Jiang (iplus26)
@@ -293,12 +273,17 @@ Collection.getDataByPage(url);
 1. 新增收藏列表的数据抓取
 2. 查询某个收藏下的所有数据和分页数据
 
-[1]:	#%E7%94%A8%E6%88%B7-user-api
-[2]:	#%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0-post-api
-[3]:	#%E7%AD%94%E6%A1%88-answer-api
-[4]:	#%E9%97%AE%E9%A2%98-question-api
-[5]:	#%E8%AF%9D%E9%A2%98-topic-api
-[6]:	http://www.zhihu.com/people/shanelau1021
-[7]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136
-[8]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10
-[9]:	http://www.zhihu.com/topic/19778317/questions
+[1]:	https://nodei.co/npm/zhihu/
+[2]:	https://travis-ci.org/iplus26/zhihu/builds
+[3]:	#%E7%94%A8%E6%88%B7-user-api
+[4]:	#%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0-post-api
+[5]:	#%E7%AD%94%E6%A1%88-answer-api
+[6]:	#%E9%97%AE%E9%A2%98-question-api
+[7]:	#%E8%AF%9D%E9%A2%98-topic-api
+[8]:	http://www.zhihu.com/people/shanelau1021
+[9]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136
+[10]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10
+[11]:	http://www.zhihu.com/topic/19778317/questions
+
+[image-1]:	https://nodei.co/npm/zhihu.png?downloads=true "NPM"
+[image-2]:	https://travis-ci.org/iplus26/zhihu.svg

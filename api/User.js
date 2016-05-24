@@ -20,22 +20,28 @@ function formatFollowData(str) {
   if (str.indexOf('K') !== -1) {
     return parseInt(str) * 1000;
   }
-
   // if (str.indexOf('K') !== -1) {
   //   return parseInt(str) * 10000;
   // }
   return parseInt(str);
 }
 
-var getUserByName = function (name) {
+/*
+ * @param name  The name of Zhihu user
+ * @return      A promise 
+ */
+var getUserByName = function(name) {
   var data = {
     url: API.user.info,
     qs: {
-      params: JSON.stringify({url_token: name}),
+      params: JSON.stringify({
+        'url_token': name
+      }),
     },
   };
-  return request(data).then(function (content) {
-    var responseBody = content[0].body;
+
+  return request(data).then(function(content) {
+    var responseBody = content.body;
     var $ = cheerio.load(responseBody);
     var values = $('span.value');
     var result = {
@@ -51,21 +57,13 @@ var getUserByName = function (name) {
   });
 };
 
-var questions = function (qID) {
+var questions = function(qID) {};
 
-};
+var answers = function(qID) {};
 
-var answers = function (qID) {
+var zhuanlansFocus = function() {};
 
-};
-
-var zhuanlansFocus = function () {
-
-};
-
-var topic = function () {
-
-};
+var topic = function() {};
 
 module.exports = {
   getUserByName: getUserByName,
