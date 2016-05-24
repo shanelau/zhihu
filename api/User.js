@@ -34,7 +34,7 @@ var getUserByName = function (name) {
   return request(data).then(function (content) {
     var responseBody = content.body;
     var $ = cheerio.load(responseBody);
-    var values = $("span.value");
+    var values = $('span.value');
     var result = {
       answer  : formatFollowData(values.eq(0).text()),
       post    : formatFollowData(values.eq(1).text()),
