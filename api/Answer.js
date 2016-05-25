@@ -46,13 +46,53 @@ var getVotersById = function(answerId) {
 
     if (Array.isArray(buffer.payload)) {
       voters = buffer.payload.map(function(payload) {
-        var $ = cheerio.load(payload);
-        var userName = $('a[title]').attr('title');
-        return userName;
+        var $ = cheerio.load(payload),
+          user = {};
+
+        var anchor = $('a[title]'),
+          status = $('ul.status > li').children('a, span');
+        user.name = anchor.attr('title');
+
+        user.anonymous = user.name ? false : true;
+
+        if (!user.anonymous) {
+          user.profileUrl = anchor.attr('href');
+          user.sex = (function(str) {
+            switch (str) {
+              case '他':
+                return 'male';
+              case '她':
+                return 'female';
+              default:
+                return undefined;
+            }
+          })($('.zg-btn-follow').text().slice(2));
+
+        } else {
+          user.name = '匿名用户';
+        }
+
+        user.avatar = $('.zm-item-img-avatar').attr('src');
+        user.like = parseInt(status.eq(0).text());
+        user.thank = parseInt(status.eq(1).text());
+        user.question = (function(el) {
+          var href = el.attr('href');
+          if (href) {
+            this.questionUrl = href;
+          }
+          return parseInt(el.text());
+        }).call(user, status.eq(2));
+        user.answer = (function(el) {
+          var href = el.attr('href');
+          if (href) {
+            this.answerUrl = href;
+          }
+          return parseInt(el.text());
+        }).call(user, status.eq(3));
+
+        return user;
       });
     }
-
-    console.log(voters);
 
     return voters;
   });
