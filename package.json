@@ -3,18 +3,20 @@
   "preferGlobal": "true",
   "version": "1.0.0",
   "author": "kissliux <shanelau1021@gmail.com>",
-  "contributors": ["Ivan Jiang <iplus26@gmail.com>"],
+  "contributors": [
+    "Ivan Jiang <iplus26@gmail.com>"
+  ],
   "description": "zhihu api ,获取知乎平台信息数据的接口",
   "main": "index.js",
   "engines": {
     "node": " >0.10.x"
   },
   "dependencies": {
-    "async": "*",
-    "bluebird": "*",
+    "async": "^1.5.2",
+    "bluebird": "^3.4.0",
     "cheerio": "^0.17.0",
-    "lodash": "*",
-    "request": "*"
+    "lodash": "^4.13.1",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "should": "^4.3.0",
