@@ -10,7 +10,7 @@ var cheerio = require('cheerio');
 var fs = require('fs');
 var API = require('../config/api');
 
-var getTopicByID = function (topicID, page) {
+var getTopicByID = function(topicID, page) {
   var page = page || 1;
   var data = {
     url: API.topic_url + topicID + '/questions',
@@ -19,8 +19,8 @@ var getTopicByID = function (topicID, page) {
     },
   };
 
-  return request(data).then(function (content) {
-    var responseBody = content[0].body;
+  return request(data).then(function(content) {
+    var responseBody = content.body;
     var $ = cheerio.load(responseBody);
     var result = {
       name: $('.topic-info .topic-name h1').text(),
@@ -29,11 +29,11 @@ var getTopicByID = function (topicID, page) {
     let questions = {};
     let index = 0;
 
-    $('div.feed-item.feed-item-hook.question-item').each(function () {
+    $('div.feed-item.feed-item-hook.question-item').each(function() {
       questions[index] = {};
       questions[index].title = $('a.question_link', this).text();
       questions[index].url = API.zhihu +
-        $('a.question_link', this).attr('href');
+      $('a.question_link', this).attr('href');
       questions[index].postTime = $('span.time', this).text();
       index = index + 1;
     });
@@ -45,7 +45,7 @@ var getTopicByID = function (topicID, page) {
   });
 };
 
-var getTopicTopAnswersByID = function (topicID, page) {
+var getTopicTopAnswersByID = function(topicID, page) {
   var page = page || 1;
   var data = {
     url: API.topic_url + topicID + '/top-answers',
@@ -54,8 +54,8 @@ var getTopicTopAnswersByID = function (topicID, page) {
     },
   };
 
-  return request(data).then(function (content) {
-    var responseBody = content[0].body;
+  return request(data).then(function(content) {
+    var responseBody = content.body;
     var $ = cheerio.load(responseBody);
     var result = {
       name: $('.topic-info .topic-name h1').text(),
@@ -64,7 +64,7 @@ var getTopicTopAnswersByID = function (topicID, page) {
     let questions = {};
     let index = 0;
 
-    $('div.feed-item.feed-item-hook.folding').each(function () {
+    $('div.feed-item.feed-item-hook.folding').each(function() {
       questions[index] = {};
       questions[index].title = $('a.question_link', this).text();
       questions[index].url = API.zhihu + $('a.question_link', this).attr('href');
@@ -74,7 +74,7 @@ var getTopicTopAnswersByID = function (topicID, page) {
       questions[index].user = {};
       questions[index].user.name = $('h3.zm-item-answer-author-wrap a', this).text();
       questions[index].user.url = API.zhihu
-        + $('h3.zm-item-answer-author-wrap a', this).attr('href');
+      + $('h3.zm-item-answer-author-wrap a', this).attr('href');
       index++;
     });
 

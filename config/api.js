@@ -6,24 +6,30 @@
  * @description  zhihu api  url template ，知乎api 接口模板
  *
  */
+'use strict';
+
+const zhihu = 'https://www.zhihu.com',
+  zhuanlan = 'https://zhuanlan.zhihu.com';
+
 module.exports = {
-  zhihu: 'http://www.zhihu.com',
-  zhuanlan: 'https://zhuanlan.zhihu.com/',
-  topic_url: 'https://www.zhihu.com/topic/',
+  zhihu: zhihu,
+  zhuanlan: zhuanlan,
+  topic_url: zhihu + '/topic/',
   post: {
-    info: 'https://zhuanlan.zhihu.com/api/posts/<%= postID%>',
-    likers: 'https://zhuanlan.zhihu.com/api/posts/<%=postID%>/likers',
-    page: 'https://zhuanlan.zhihu.com/api/columns/<%=name %>/posts',
-    zhuanlan: 'https://zhuanlan.zhihu.com/api/columns/',
+    info: zhuanlan + '/api/posts/<%= postID%>',
+    likers: zhuanlan + '/api/posts/<%=postID%>/likers',
+    page: zhuanlan + '/api/columns/<%=name %>/posts',
+    zhuanlan: zhuanlan + '/api/columns/',
   },
   answer: {
-    likers: 'https://www.zhihu.com/node/AnswerFullVoteInfoV2',
+    likers: zhihu + '/node/AnswerFullVoteInfoV2',
+    voters: zhihu + '/answer/<%= answerId %>/voters_profile',
   },
   user: {
-    info: 'https://www.zhihu.com/node/MemberProfileCardV2',
+    info: zhihu + '/node/MemberProfileCardV2',
   },
   collection: {
     // full url: http://www.zhihu.com/collection/25547043?page=1
-    url: 'https://www.zhihu.com/collection/',
+    url: zhihu + '/collection/',
   },
 };

@@ -3,6 +3,7 @@
   "preferGlobal": "true",
   "version": "1.0.0",
   "author": "kissliux <shanelau1021@gmail.com>",
+  "contributors": ["Ivan Jiang <iplus26@gmail.com>"],
   "description": "zhihu api ,获取知乎平台信息数据的接口",
   "main": "index.js",
   "engines": {
@@ -16,6 +17,10 @@
     "request": "*"
   },
   "devDependencies": {
-    "should": "^4.3.0"
+    "should": "^4.3.0",
+    "mocha": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --timeout 15000"
   }
 }
