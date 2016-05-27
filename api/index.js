@@ -11,11 +11,13 @@ var User = require('./User');
 var Collection = require('./Collection');
 var Topic = require('./Topic');
 var Answer = require('./Answer');
+var Question = require('./Question');
 
 module.exports = {
   Post: Post,
   User: User,
   Topic: Topic,
   Collection: Collection,
-  Answer: Answer
+  Answer: Answer,
+  Question: Question
 };

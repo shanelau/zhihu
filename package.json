@@ -3,7 +3,9 @@
   "preferGlobal": "true",
   "version": "1.0.0",
   "author": "kissliux <shanelau1021@gmail.com>",
-  "contributors": ["Ivan Jiang <iplus26@gmail.com>"],
+  "contributors": [
+    "Ivan Jiang <iplus26@gmail.com>"
+  ],
   "description": "zhihu api ,获取知乎平台信息数据的接口",
   "main": "index.js",
   "engines": {
@@ -14,7 +16,8 @@
     "bluebird": "*",
     "cheerio": "^0.17.0",
     "lodash": "*",
-    "request": "*"
+    "request": "*",
+    "request-promise": "^3.0.0"
   },
   "devDependencies": {
     "should": "^4.3.0",
