@@ -11,44 +11,47 @@
 var User = require('../').User;
 var should = require('should');
 
+var shouldReturn = function() {
+  return this.then(function(value) {
+    // console.log(value);
+    Object.keys(value).length.should.above(0);
+  });
+};
+
+var shouldParseBigV = function() {
+  return this.then(function(value) {
+    // console.log(value);
+    value.follower.should.above(1000);
+  });
+};
+
+var promise1 = User.getUserByName('iplus26');
+var promise2 = User.getUserByName('fenng');
+var promise3 = User.getUserByName('magie');
+
 describe('User', function() {
   describe('#info', function() {
 
-    it('should return user info object', function(done) {
-      var name = 'iplus26';
-      User.getUserByName(name).then(function(data) {
-        console.log(data);
-        Object.keys(data).length.should.above(0);
-        done();
-      });
-    });
+    it('should return user info object',
+      shouldReturn.bind(promise1));
 
     /*
     fenng
     followed by 293,993 users, following 1891 users up to 24 May, 2016
      */
-    it('should recongize users followed by thousands', function(done) {
-      var name = 'fenng';
-      User.getUserByName(name).then(function(data) {
-        console.log(data);
-        Object.keys(data).length.should.above(0);
-        // data.follower.should.above(1000);
-        done();
-      });
-    });
+    it('should return user info object (fenng)',
+      shouldReturn.bind(promise2));
+    it('should recongize users followed by thousands (fenng)',
+      shouldParseBigV.bind(promise2));
 
     /*
     magie
     followed by 538,958 users, following 570 users up to 24 May, 2016
      */
-    it('should return user info object', function(done) {
-      var name = 'fenng';
-      User.getUserByName(name).then(function(data) {
-        console.log(data);
-        Object.keys(data).length.should.above(0);
-        data.follower.should.above(1000);
-        done();
-      });
-    });
+    it('should return user info object (magie)',
+      shouldReturn.bind(promise3));
+    it('should recongize users followed by thousands (magie)',
+      shouldParseBigV.bind(promise3));
+
   });
 });

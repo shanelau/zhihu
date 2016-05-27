@@ -16,7 +16,8 @@
     "bluebird": "^3.4.0",
     "cheerio": "^0.17.0",
     "lodash": "^4.13.1",
-    "request": "^2.72.0"
+    "request": "^2.72.0",
+    "request-promise": "^3.0.0"
   },
   "devDependencies": {
     "should": "^4.3.0",
