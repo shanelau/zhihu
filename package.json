@@ -1,7 +1,7 @@
 {
   "name": "zhihu",
   "preferGlobal": "true",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "kissliux <shanelau1021@gmail.com>",
   "contributors": [
     "Ivan Jiang <iplus26@gmail.com>"
@@ -12,11 +12,11 @@
     "node": " >0.10.x"
   },
   "dependencies": {
-    "async": "*",
-    "bluebird": "*",
+    "async": "^1.5.2",
+    "bluebird": "^3.4.0",
     "cheerio": "^0.17.0",
-    "lodash": "*",
-    "request": "*",
+    "lodash": "^4.13.1",
+    "request": "^2.72.0",
     "request-promise": "^3.0.0"
   },
   "devDependencies": {
