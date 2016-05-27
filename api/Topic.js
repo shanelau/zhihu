@@ -46,14 +46,12 @@ var getTopicByID = function(topicID, page) {
 };
 
 var getTopicTopAnswersByID = function(topicID, page) {
-  var page = page || 1;
   var data = {
     url: API.topic_url + topicID + '/top-answers',
     qs: {
-      page: page,
+      page: page || 1,
     },
   };
-
   return request(data).then(function(content) {
     var responseBody = content.body;
     var $ = cheerio.load(responseBody);
