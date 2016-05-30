@@ -25,9 +25,9 @@ var shouldParseBigV = function() {
   });
 };
 
-var promise1 = User.getUserByName('iplus26');
-var promise2 = User.getUserByName('fenng');
-var promise3 = User.getUserByName('magie');
+var promise1 = User.info('iplus26');
+var promise2 = User.info('fenng');
+var promise3 = User.info('magie');
 
 describe('User', function() {
   describe('#info', function() {
