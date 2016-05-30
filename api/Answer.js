@@ -28,7 +28,7 @@ var _renderUrl = function(answerId) {
  *                  "/question/28207685/answer/39974928",
  *                  the answerId of this post is "11382008" instead. 
  */
-var getVotersById = function(answerId) {
+var voters = function(answerId) {
 
   var options = {};
 
@@ -99,5 +99,9 @@ var getVotersById = function(answerId) {
 };
 
 module.exports = {
-  getVotersById: getVotersById
+
+  voters: voters,
+
+  // Deprecated
+  getVotersById: voters
 };
