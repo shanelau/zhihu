@@ -2,115 +2,86 @@
 
 > 知乎已经更新为 https, 本项目 \< 1.0.0 不能再使用了. 请升级
 
-[![](https://nodei.co/npm/zhihu.png?downloads=true)](https://nodei.co/npm/zhihu/)
+[![][image-1]][1]
 
-[![](https://travis-ci.org/iplus26/zhihu.svg)](https://travis-ci.org/iplus26/zhihu/builds)
+[![][image-2]][2]
 
 根据这些接口获取到知乎的数据，包括以下接口：
-
-* [User API](#user-api) (用户信息)
-	* User.info - 获取用户数据
-* [Post API](#post-api) (专栏文章)
-* [Answer API](#answer-api) (答案)
-	* Answer.voters - 获取参与答案投票的用户
-* [Question API](#question-api) (问题)
-	* Question.followers - 获取关注问题的用户
-* [Topic API](#topic-api) (话题)
+* [用户 User API][3]
+* [专栏文章 Post API][4]
+* [答案 Answer API][5]
+* [问题 Question API][6]
+* [话题 Topic API][7]
 
 **欢迎贡献代码，一起完善知乎的接口**
 
-## Getting Started
+## 快速开始
 
-```javascript
-var zhihu = require('zhihu');
+	var zhihu = require('zhihu');
 
-var username = 'shanejs';
-    
-zhihu.User.info(name).then(function(user){
-  console.log(user);
-});
+## demo
+获取用户的信息
 
-/* You'll get
-{ 
-  answer:     14,
-  post:       0,
-  follower:   529,
-  profileUrl: 'https://www.zhihu.com/people/shanejs',
-  name:       '狂飙蜗牛',
-  sex:        'male' 
-}
-*/
-```
+	var username = 'shanejs';
+	zhihu.User.getUserByName(name).then(function(user){
+	  console.log(user);
+	});
 
-## Usage 
-### User API
-#### User.info(username)
-根据用户名获取到用户的简要信息，`username` 为用户的唯一标识，参见个人主页的 url，或者设置中的个性域名（只能修改一次）。
+结果
 
-比如请求这个用户 shanelau ([zhihu.com/people/shanelau](https://www.zhihu.com/people/shanelau)): 
+	{ answer: 14,
+	 post: 0,
+	 follower: 529,
+	 profileUrl: 'https://www.zhihu.com/people/shanejs',
+	 name: '狂飙蜗牛',
+	 sex: 'male' }
 
-```javascript
-var zhihu = require('zhihu');
-var name = 'shanelau';
-	
-zhihu.User.info(name).then(function(user){
-  console.log(user);
-});
-```
+## 用户 User API
+### User.getUserByName(username)
+根据用户名获取到用户的信息，用户名为用的唯一标识，参见个人主页的url，或者设置中的个性网站  
 
-请求成功将会返回：
+* `username`  //用户位置标识
 
-```javascript
-/*
- * answer     (number) 答题数量
- * post       (number) 文章数量
- * follower   (number) 跟随者数量
- * profileUrl (string) 个人主页
- * name       (string) 名字
- * sex        (string) 性别
- */
+**Example** 
+ 
+请求这个用户：[https://www.zhihu.com/people/shanelau1021][8]  
+`name` 为 `shanelau1021`
 
- { 
-   answer:       5,
-   post:         0,
-   follower:     456,
-   profileUrl:   'https://www.zhihu.com/people/shanelau1021',
-   name:         '狂飙蜗牛',
-   sex:          'male' 
- }
-```
+	var nam = 'shanelau1021';
+	zhihu.User.getUserByName(name).then(function(user){
+	  console.log(user);
+	});
+
+**Result**
+
+参数说明
+
+* `answer`答题数量
+* `post` 文章数量
+* `follower` 跟随者数量
+* `profileUrl` 个人主页
+* `name` 名字
+* `sex`性别
+
+	{ answer: 5,
+	 post: 0,
+	 follower: 456,
+	 profileUrl: 'https://www.zhihu.com/people/shanelau1021',
+	 name: '狂飙蜗牛',
+	 sex: 'male' }
 
 
-
-#### User.questions
-用户的提问列表  
-@TODO
-
-#### User.answers
-用户的回答列表  
-@TODO
-
-#### User.zhuanlansFocus
-用户关注的专栏  
-@TODO
-
-#### User.topic
-用户关注的话题信息  
-@TODO
-
-### Post API
-#### Post.info(postUrl)
+## 专栏文章 Post API
+### Post.info(postUrl)
 获取专栏文章的详细信息
 
 * `postUrl`  文章的url地址
 
 **Example**
 
-```javascript
-zhihu.Post.info(postUrl).then(function(data){
-  // do something
-});
-```
+	zhihu.Post.info(postUrl).then(function(data){
+	  //do something
+	});
 
 **Result**  
 
@@ -118,25 +89,24 @@ zhihu.Post.info(postUrl).then(function(data){
 
 [example][9]
 
-#### Post.page(name, options)
+### Post.page(name,options)
 获取专栏文章列表
 
 * `name` 专栏的英文名字， 例如：'bigertech'
 * `options`  {object}  ,默认值为10
 
-```javascript
-{
-  limit: 10   // 记录数
-  offset: 10  // 偏移量
-}
-```
+	 {
+	   limit: 10   // 记录数
+	   offset: 10  // 偏移量
+	 }
+
 
 **Example**
 
 [demo][10]
 
 
-#### Post.likersDetail(postUrl)
+### Post.likersDetail(postUrl)
 获取文章的点赞者的详细信息
 
 * `postUrl`  文章的url地址
@@ -148,28 +118,26 @@ zhihu.Post.info(postUrl).then(function(data){
 * `{Array}`   //User
 
 
-#### Post.zhuanlanInfo(name)
+### Post.zhuanlanInfo(name)
 获取专栏的信息
 
 * `name`  专栏的名字，比如 `bigertech`
 
 **Result**  
 
-```javascript
-{
-  followersCount: 22614,
-  description: '',
-  creator:
+	{ followersCount: 22614,
+	 description: '',
+	 creator:
 	 { bio: '魅族营销中心招募设计师',
 	 hash: '29c3654588fd4246bb90cbd345242d65',
 	 description: '',
 	 profileUrl: 'http://www.zhihu.com/people/linan',
 	 avatar:
 	 { id: '24f3a654b',
-	   template: 'http://pic2.zhimg.com/{id}\_{size}.jpg' },
-	   slug: 'linan',
-	   name: '李楠' },
-	 topics: [],
+	 template: 'http://pic2.zhimg.com/{id}\_{size}.jpg' },
+	 slug: 'linan',
+	 name: '李楠' },
+	 topics: \[],
 	 href: '/api/columns/bigertech',
 	 acceptSubmission: true,
 	 slug: 'bigertech',
@@ -177,81 +145,79 @@ zhihu.Post.info(postUrl).then(function(data){
 	 url: '/bigertech',
 	 avatar:
 	 { id: 'a4bf61d95',
-	   template: 'http://pic3.zhimg.com/{id}\_{size}.jpg' },
-	   commentPermission: 'anyone',
-	   following: false,
-	   postsCount: 173,
-	   canPost: false,
-	   activateAuthorRequested: false }
-```
+	 template: 'http://pic3.zhimg.com/{id}\_{size}.jpg' },
+	 commentPermission: 'anyone',
+	 following: false,
+	 postsCount: 173,
+	 canPost: false,
+	 activateAuthorRequested: false }
+
+* `{Array}`   //User
 
 
 
-### Answer API
-#### Answer.voters(answerId)
-
-用 `answerId` 获取这个回答的点赞者。注意 `answerId` 与 `url_token` 的区别，`answerId` 可以在 DOM Tree 中找到，具体的对应关系仍在探索中。知乎的一篇回答的 URL 结构一般是：
-
-```
-zhihu.com/question/12345/answer/67890
-                   ^^^^^        ^^^^^
-          question token        answer token
-              
-zhihu.com/answer/12306/voters_profile
-                 ^^^^^
-                 answer id
-```
+## 答案 Answer API
+### getVotersById(string answerId)
+用 answerId 请求这个回答的点赞者。不同于 url 中显而易见的 "/question/numbers/answer/othernumbers/" 的数字，answerId 是相对隐含的。比如 "/question/28207685/answer/39974928"，这个回答的 answerId 应为 "11382008", 可以在 DOM tree 中找到。具体的对应关系正在探索。
 
 @TODO 实现知乎支持的更多参数，比如 offset 等
 
-### Question API
-#### Question.followers(token[, offset])
-#### Question.followers(options)
-获取该问题的回答列表
+## 问题 Question API
+### focus
+问题的关注列表  
+@TODO
 
-```javascript
-var Question = require('zhihu').Question;
-
-Question.answers('19557271');
-Question.answers('19557271', 10); // start from 10
-Question.answers({token: '19557271', offset: 10});
-```
-    
-
-### Collection API
+### Collection
 问题的收藏列表
-
 `url : http://www.zhihu.com/collection/25547043?page=1`
 
 
-#### Collection.getAllPageData
+#### getAllPageData
 获取所有的页面数据,遍历所有的页面
 
-```javascript
-Collection.getAllPageData(url);
-```
+	Collection.getAllPageData(url);
 
-#### Collection.getDataByPage
+#### getDataByPage,
 获取某一页的页面数据
 
-```javascript
-var url = 'http://www.zhihu.com/collection/25547043?page=1';
-Collection.getDataByPage(url);
-```
+	var url = 'http://www.zhihu.com/collection/25547043?page=1';
+	Collection.getDataByPage(url);
 
-#### Collection.getPagination
+#### getPagination
 获取改收藏列表的分页信息
 
-```
-{
-  pages: 总页数，
-  current： 当前页面
-}
-```
+	{
+	 pages: 总页数，
+	 current： 当前页面
+	}
 
-### Topic API
 
-#### Topic.getTopicByID(topicID[, page])
+### info
+问题的详细信息
+@TODO
+
+
+
+### questions
+用户的提问列表  
+@TODO
+
+### answers
+用户的回答列表  
+@TODO
+### zhuanlansFocus
+用户关注的专栏  
+@TODO
+
+### topic
+用户关注的话题信息  
+@TODO
+
+
+
+## 话题 Topic API
+
+### Topic.getTopicByID(topicID[, page])
 根据话题id获取该话题下的问题，话题id为唯一标识，参见话题的url
 - `topicID` 话题的ID
 
@@ -260,45 +226,38 @@ Collection.getDataByPage(url);
 请求这个话题：[生活、艺术、文化与活动][11]  
 `topicID` 为 `19778317`
 
-```javascript
-var topicID = '19778317';
-zhihu.Topic.getTopicByID(topicID).then(function(result){
-  console.log(result);
-});
-```
+
+	var topicID = '19778317';
+	    zhihu.Topic.getTopicByID(topicID).then(function(result){
+	    console.log(result);
+	});
 
 
   **Result**
 
-参数说明
-  
-```javascript
-/* You'll get
- * name:      (string) 话题名称
- * page:      (number) 当前页数
- * totalPage: (number) 该话题下问题总页数
- * questions: (object) 当页问题
- * - title:   (string) 问题名字
- * - url:     (string) 问题链接
- * - postTime:(string) 问题最近更新时间
- */
+  参数说明
 
-{ 
-  name: '生活、艺术、文化与活动',
-  page: 1,
-  totalPage: 47242,
-  questions:
-    { '0':
-      { title: '为什么很多人能接受有过长期恋爱经历，却不能接受有过婚姻的人？',
-        url: 'http://www.zhihu.com/question/27816723',
-        postTime: '41 秒前' },
-      '19':
-      { title: '360卫士在C盘为什么不可以删掉？',
-        url: 'http://www.zhihu.com/question/27816632',
-        postTime: '5 分钟前' } 
-    } 
-}
-```
+  * `name` 话题名称
+  * `page` 当前页数
+  * `totalPage` 该话题下问题总页数
+  * `questions` 当页问题
+	  -    `title` 问题名字
+	  -    `url` 问题链接
+	  -    `postTime` 问题最近更新时间
+
+
+	 { name: '生活、艺术、文化与活动',
+	 page: 1,
+	 totalPage: 47242,
+	 questions:
+	 { '0':
+	 { title: '为什么很多人能接受有过长期恋爱经历，却不能接受有过婚姻的人？',
+	 url: 'http://www.zhihu.com/question/27816723',
+	 postTime: '41 秒前' },
+	 '19':
+	 { title: '360卫士在C盘为什么不可以删掉？',
+	 url: 'http://www.zhihu.com/question/27816632',
+	 postTime: '5 分钟前' } } }
 
 ## 贡献者
 1. shanelau
@@ -314,7 +273,17 @@ zhihu.Topic.getTopicByID(topicID).then(function(result){
 1. 新增收藏列表的数据抓取
 2. 查询某个收藏下的所有数据和分页数据
 
+[1]:	https://nodei.co/npm/zhihu/
+[2]:	https://travis-ci.org/iplus26/zhihu/builds
+[3]:	#%E7%94%A8%E6%88%B7-user-api
+[4]:	#%E4%B8%93%E6%A0%8F%E6%96%87%E7%AB%A0-post-api
+[5]:	#%E7%AD%94%E6%A1%88-answer-api
+[6]:	#%E9%97%AE%E9%A2%98-question-api
+[7]:	#%E8%AF%9D%E9%A2%98-topic-api
 [8]:	http://www.zhihu.com/people/shanelau1021
 [9]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts/19885136
 [10]:	https://zhuanlan.zhihu.com/api/columns/bigertech/posts?limit=1&offset=10
 [11]:	http://www.zhihu.com/topic/19778317/questions
+
+[image-1]:	https://nodei.co/npm/zhihu.png?downloads=true "NPM"
+[image-2]:	https://travis-ci.org/iplus26/zhihu.svg
