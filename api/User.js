@@ -30,7 +30,7 @@ function formatFollowData(str) {
  * @param name  The name of Zhihu user
  * @return      A promise 
  */
-var info = function(name) {
+var getUserByName = function(name) {
   var data = {
     url: API.user.info,
     qs: {
@@ -66,15 +66,9 @@ var zhuanlansFocus = function() {};
 var topic = function() {};
 
 module.exports = {
-
-  info: info,
-
-  // TODO
+  getUserByName: getUserByName,
   zhuanlansFocus: zhuanlansFocus,
   question: questions,
   answers: answers,
   topic: topic,
-
-  // Deprecated
-  getUserByName: info,
 };
