@@ -3,25 +3,33 @@
 var request = require('request-promise'),
   cheerio = require('cheerio');
 
-var getFollowersByIdAsync = function(params) {
+var answers = function(params) {
+
+  if (typeof params === 'string') {
+    params = {
+      token: arguments[0],
+      offset: arguments[1] || 0,
+      // pagesize: arguments[2] || 10,
+    };
+  }
 
   var opt = {
     uri: 'https://www.zhihu.com/node/QuestionAnswerListV2',
     form: {
       method: 'next',
       params: JSON.stringify({
-        'url_token': params.id,
+        'url_token': params.token,
         'pagesize': params.pagesize,
-        'offset': params.offset,
+        'offset': 10, // params.offset,
       })
     },
     method: 'POST',
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) ' +
         'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36',
-      'Referer': 'https://www.zhihu.com/question/' + params.id,
+      'Referer': 'https://www.zhihu.com/question/' + params.token,
     },
-  }
+  };
 
   return request(opt)
     .then(function(content) {
@@ -31,7 +39,7 @@ var getFollowersByIdAsync = function(params) {
         if (Array.isArray(data.msg)) {
           ret = data.msg.map(function(payload) {
             var $ = cheerio.load(payload, {
-            	decodeEntities: false,
+              decodeEntities: false,
             });
 
             var author = $('.zm-item-answer-author-info'),
@@ -67,5 +75,5 @@ var getFollowersByIdAsync = function(params) {
 };
 
 module.exports = {
-  getFollowersByIdAsync: getFollowersByIdAsync
+  answers: answers,
 };
