@@ -25,5 +25,17 @@
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha --timeout 15000"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shanelau/zhihu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shanelau/zhihu/issues"
+  },
+  "homepage": "https://github.com/shanelau/zhihu#readme",
+  "directories": {
+    "test": "test"
+  },
+  "license": "MIT"
 }
