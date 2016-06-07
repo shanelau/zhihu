@@ -287,3 +287,7 @@
 
 [image-1]:	https://nodei.co/npm/zhihu.png?downloads=true "NPM"
 [image-2]:	https://travis-ci.org/iplus26/zhihu.svg
+
+### LICENSE
+
+[MIT](./LICENSE)
