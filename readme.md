@@ -21,9 +21,9 @@
 ```javascript
 var zhihu = require('zhihu');
 
-var username = 'shanejs';
-    
-zhihu.User.info(name).then(function(user){
+var zhihuId = 'shanejs';
+
+zhihu.User.getUserByName(zhihuId).then(function(user){
   console.log(user);
 });
 
@@ -48,9 +48,9 @@ zhihu.User.info(name).then(function(user){
 
 ```javascript
 var zhihu = require('zhihu');
-var name = 'shanelau';
-	
-zhihu.User.info(name).then(function(user){
+var zhihuId = 'shanelau';
+
+zhihu.User.getUserByName(zhihuId).then(function(user){
   console.log(user);
 });
 ```
