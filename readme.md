@@ -25,7 +25,7 @@ var zhihu = require('zhihu');
 
 var username = 'shanejs';
     
-zhihu.User.info(name).then(function(user){
+zhihu.User.info(username).then(function(user){
   console.log(user);
 });
 
