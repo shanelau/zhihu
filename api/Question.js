@@ -20,7 +20,7 @@ var answers = function(params) {
       params: JSON.stringify({
         'url_token': params.token,
         'pagesize': params.pagesize,
-        'offset': 10, // params.offset,
+        'offset': 0, // params.offset,
       })
     },
     method: 'POST',
