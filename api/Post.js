@@ -82,7 +82,7 @@ var info = function(postUrl) {
 
 var page = function(name, options) {
   var data = {
-    url: _.template(API.post.page, {
+    url: _.template(API.post.page)({
       name: name,
     }),
     qs: {
