@@ -65,7 +65,7 @@ function getDataByPage(url) {
     headers: config.headers,
   };
   return request(options).then(function (body) {
-    return getItems(body[1]);
+    return getItems(body.body);
   });
 }
 
@@ -80,7 +80,7 @@ function getPagination(url) {
     headers: config.headers,
   };
   return request(options).then(function (body) {
-    var $ = cheerio.load(body[1]);
+    var $ = cheerio.load(body.body);
     var pages = $('.zm-invite-pager span').eq(-2).text();
     var currentPage = $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
     return {
