@@ -6,18 +6,18 @@
  * @description
  *
  */
-var Post = require('./Post');
-var User = require('./User');
-var Collection = require('./Collection');
-var Topic = require('./Topic');
-var Answer = require('./Answer');
-var Question = require('./Question');
+let Post = require('./Post');
+let User = require('./User');
+let Collection = require('./Collection');
+let Topic = require('./Topic');
+let Answer = require('./Answer');
+let Question = require('./Question');
 
 module.exports = {
-  Post: Post,
-  User: User,
-  Topic: Topic,
-  Collection: Collection,
-  Answer: Answer,
-  Question: Question
+  Post,
+  User,
+  Topic,
+  Collection,
+  Answer,
+  Question
 };

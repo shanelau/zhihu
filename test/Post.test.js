@@ -6,13 +6,13 @@
  * @description
  *
  */
-var Post = require('../').Post;
-var should = require('should');
+let Post = require('../').Post;
+let should = require('should');
 
 describe('Post', function () {
   describe('#info', function () {
     it('should return post info object', function (done) {
-      var postUrl = 'https://zhuanlan.zhihu.com/p/19888522';
+      let postUrl = 'https://zhuanlan.zhihu.com/p/19888522';
       Post.info(postUrl).then(function (data) {
         Object.keys(data).length.should.above(0);
         done();
@@ -25,7 +25,7 @@ describe('Post', function () {
 
   describe('#zhuanlan', function () {
     it('should return zhuanlan info object', function (done) {
-      var name = 'bigertech';
+      let name = 'bigertech';
       Post.zhuanlanInfo(name).then(function (data) {
         Object.keys(data).length.should.above(0);
         done();

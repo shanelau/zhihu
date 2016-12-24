@@ -4,36 +4,33 @@
 
 'use strict';
 
-var Promise = require('bluebird');
-var request = Promise.promisify(require('request'));
-var cheerio = require('cheerio');
-var fs = require('fs');
-var API = require('../config/api');
+const {request, cheerio} = require('../config/commonModules');
 
-var getTopicByID = function(topicID, page) {
-  var page = page || 1;
-  var data = {
+let API = require('../config/api');
+
+let getTopicByID = (topicID, page = 1) => {
+  let data = {
     url: API.topic_url + topicID + '/questions',
     qs: {
-      page: page,
+      page
     },
   };
 
-  return request(data).then(function(content) {
-    var responseBody = content.body;
-    var $ = cheerio.load(responseBody);
-    var result = {
+  return request(data).then((content) => {
+    let responseBody = content.body;
+    let $ = cheerio.load(responseBody);
+    let result = {
       name: $('.topic-info .topic-name h1').text(),
     };
 
     let questions = {};
     let index = 0;
 
-    $('div.feed-item.feed-item-hook.question-item').each(function() {
+    $('div.feed-item.feed-item-hook.question-item').each(function () {
       questions[index] = {};
       questions[index].title = $('a.question_link', this).text();
       questions[index].url = API.zhihu +
-      $('a.question_link', this).attr('href');
+        $('a.question_link', this).attr('href');
       questions[index].postTime = $('span.time', this).text();
       index = index + 1;
     });
@@ -45,24 +42,24 @@ var getTopicByID = function(topicID, page) {
   });
 };
 
-var getTopicTopAnswersByID = function(topicID, page) {
-  var data = {
+let getTopicTopAnswersByID = (topicID, page = 1) => {
+  let data = {
     url: API.topic_url + topicID + '/top-answers',
     qs: {
-      page: page || 1,
-    },
+      page
+    }
   };
-  return request(data).then(function(content) {
-    var responseBody = content.body;
-    var $ = cheerio.load(responseBody);
-    var result = {
+  return request(data).then((content) => {
+    let responseBody = content.body;
+    let $ = cheerio.load(responseBody);
+    let result = {
       name: $('.topic-info .topic-name h1').text(),
     };
 
     let questions = {};
     let index = 0;
 
-    $('div.feed-item.feed-item-hook.folding').each(function() {
+    $('div.feed-item.feed-item-hook.folding').each(function () {
       questions[index] = {};
       questions[index].title = $('a.question_link', this).text();
       questions[index].url = API.zhihu + $('a.question_link', this).attr('href');
@@ -72,7 +69,7 @@ var getTopicTopAnswersByID = function(topicID, page) {
       questions[index].user = {};
       questions[index].user.name = $('h3.zm-item-answer-author-wrap a', this).text();
       questions[index].user.url = API.zhihu
-      + $('h3.zm-item-answer-author-wrap a', this).attr('href');
+        + $('h3.zm-item-answer-author-wrap a', this).attr('href');
       index++;
     });
 
@@ -84,6 +81,6 @@ var getTopicTopAnswersByID = function(topicID, page) {
 };
 
 module.exports = {
-  getTopicByID: getTopicByID,
-  getTopicTopAnswersByID: getTopicTopAnswersByID,
+  getTopicByID,
+  getTopicTopAnswersByID
 };

@@ -8,26 +8,24 @@
  */
 'use strict';
 
-const util = require('url');
+const {cheerio, request, Promise, util: url} = require('../config/commonModules');
+
 const config = require('../config');
 const API = require('../config/api');
-const cheerio = require('cheerio');
-const Promise = require('bluebird');
-const request = Promise.promisify(require('request'));
 
 function getItems(body) {
-  var $ = cheerio.load(body);
-  var allZMItem = $('.zm-item');
-  var items = [];
+  let $ = cheerio.load(body);
+  let allZMItem = $('.zm-item');
+  let items = [];
   allZMItem.each(function (index, element) {
-    var h2 = $(element).find('h2.zm-item-title a');
-    var href = h2.attr('href') || '';
-    var content = $(element).find('div.zm-item-fav div');
-    var user = content.find('.answer-head .zm-item-answer-author-wrap');
-    var answerID = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-aid'));
-    var atoken = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-atoken'));
-    var html = $(element).find('textarea.content').html();
-    var item = {
+    let h2 = $(element).find('h2.zm-item-title a');
+    let href = h2.attr('href') || '';
+    let content = $(element).find('div.zm-item-fav div');
+    let user = content.find('.answer-head .zm-item-answer-author-wrap');
+    let answerID = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-aid'));
+    let atoken = parseInt($(element).find('.zm-item-fav .zm-item-answer ').attr('data-atoken'));
+    let html = $(element).find('textarea.content').html();
+    let item = {
       aid: answerID,
       voter: parseInt($(element).find('.zm-item-vote a.zm-item-vote-count').text()),
       desc: content.find('div.zh-summary.summary').text(),
@@ -60,9 +58,9 @@ function getDataByPage(url) {
     throw new Error('Url not match!');
   }
 
-  var options = {
-    url: url,
-    headers: config.headers,
+  let options = {
+    url,
+    headers: config.headers
   };
   return request(options).then(function (body) {
     return getItems(body.body);
@@ -75,14 +73,14 @@ function getDataByPage(url) {
  * @returns {*}
  */
 function getPagination(url) {
-  var options = {
-    url: url,
-    headers: config.headers,
+  let options = {
+    url,
+    headers: config.headers
   };
   return request(options).then(function (body) {
-    var $ = cheerio.load(body.body);
-    var pages = $('.zm-invite-pager span').eq(-2).text();
-    var currentPage = $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
+    let $ = cheerio.load(body.body);
+    let pages = $('.zm-invite-pager span').eq(-2).text();
+    let currentPage = $('.zm-invite-pager span.zg-gray-normal').eq(-1).text();
     return {
       pages: parseInt(pages),
       current: parseInt(currentPage),
@@ -97,21 +95,20 @@ function getPagination(url) {
  * @returns {*}
  */
 function getAllPageData(url) {
-  var formatUrl = util.parse(url);
-  var realUrl = config.zhihu + formatUrl.pathname;
-  var allItems = [];
+  let formatUrl = util.parse(url);
+  let realUrl = config.zhihu + formatUrl.pathname;
+  let allItems = [];
   return getPagination(url).then(function (paginations) {
-    var pages = [];
-    for (var i = 1; i <= paginations.pages; i++) {
+    let pages = [];
+    for (let i = 1; i <= paginations.pages; i++) {
       pages.push(i);
     }
 
+    //并发
     return Promise.map(pages, function (page) {
-      var pageUrl = realUrl + '?page=' + page;
+      let pageUrl = realUrl + '?page=' + page;
       return getDataByPage(pageUrl).then(function (items) {
-        console.log('page %d finished! %d', page, items.length);
         allItems = allItems.concat(items);
-        return;
       });
     }, {concurrency: 5}).then(function (total) {
       return total;
@@ -126,31 +123,31 @@ function getCollectionInfo(url) {
     throw new Error('Url not match!');
   }
 
-  var cid = parseInt(url.match(/\d+/)[0]);
-  var options = {
-    url: url,
-    headers: config.headers,
+  let cid = parseInt(url.match(/\d+/)[0]);
+  let options = {
+    url,
+    headers: config.headers
   };
   return request(options).then(function (body) {
-    var $ = cheerio.load(body[1]);
-    var title = $('#zh-fav-head-title').text();
-    var $user = $('#zh-single-answer-author-info .zm-list-content-title a');
-    var user = {
+    let $ = cheerio.load(body[1]);
+    let title = $('#zh-fav-head-title').text();
+    let $user = $('#zh-single-answer-author-info .zm-list-content-title a');
+    let user = {
       img: $('a.zm-list-avatar-link .zm-list-avatar-medium').attr('src'),
       name: $user.text(),
       url: $user.attr('href'),
     };
     return {
-      cid: cid,
-      title: title,
-      user: user,
+      cid,
+      title,
+      user
     };
   });
 }
 
 module.exports = {
-  getAllPageData: getAllPageData,
-  getDataByPage: getDataByPage,
-  getPagination: getPagination,
-  getCollectionInfo: getCollectionInfo,
+  getAllPageData,
+  getDataByPage,
+  getPagination,
+  getCollectionInfo
 };

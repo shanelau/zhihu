@@ -6,9 +6,6 @@
  * @description
  *
  */
-var api = require('./api');
+let api = require('./api');
 
 module.exports = api;
-
-
-//test
