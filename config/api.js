@@ -20,6 +20,7 @@ module.exports = {
     likers: zhuanlan + '/api/posts/<%=postID%>/likers',
     page: zhuanlan + '/api/columns/<%=name %>/posts',
     zhuanlan: zhuanlan + '/api/columns/',
+    comments:zhuanlan+'/api/posts/<%=postID%>/comments'
   },
   answer: {
     likers: zhihu + '/node/AnswerFullVoteInfoV2',

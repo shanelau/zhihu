@@ -135,14 +135,15 @@ zhihu.Post.info(postUrl).then(function(data){
 [demo][10]
 
 
-#### Post.likersDetail(postUrl)
-获取文章的点赞者的详细信息
+#### Post.likersDetail(postUrl[, config])
+获取专栏文章的点赞者的详细信息
 
-* `postUrl`  文章的url地址
+* `postUrl`  专栏文章的url地址
+* `config` 可选，配置对象，默认 `{limit:10, offset:10}`
 
 **Result**  
 
-用户数组
+用户数组。结构与User.info接口返回的一致。
 
 * `{Array}`   //User
 

@@ -6,11 +6,13 @@ const cheerio = require('cheerio');
 const Promise = require('bluebird');
 const request = Promise.promisify(require('request'));
 const _ = require('lodash');
+const QUERY = require('./query');
 
 module.exports = {
   url,
   cheerio,
   Promise,
   request,
-  _
+  _,
+  QUERY
 };
