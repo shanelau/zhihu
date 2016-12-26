@@ -24,34 +24,34 @@
 let zhihu = require('zhihu');
 
 let username = 'shanejs';
-    
+
 zhihu.User.info(username).then(function(user){
   console.log(user);
 });
 
 /* You'll get
-{ 
+{
   answer:     14,
   post:       0,
   follower:   529,
   profileUrl: 'https://www.zhihu.com/people/shanejs',
   name:       '狂飙蜗牛',
-  sex:        'male' 
+  sex:        'male'
 }
 */
 ```
 
-## Usage 
+## Usage
 ### User API
 #### User.info(username)
 根据用户名获取到用户的简要信息，`username` 为用户的唯一标识，参见个人主页的 url，或者设置中的个性域名（只能修改一次）。
 
-比如请求这个用户 shanelau ([zhihu.com/people/shanelau](https://www.zhihu.com/people/shanelau)): 
+比如请求这个用户 shanelau ([zhihu.com/people/shanelau](https://www.zhihu.com/people/shanelau)):
 
 ```javascript
 let zhihu = require('zhihu');
 let name = 'shanelau';
-	
+
 zhihu.User.info(name).then(function(user){
   console.log(user);
 });
@@ -69,32 +69,32 @@ zhihu.User.info(name).then(function(user){
  * sex        (string) 性别
  */
 
- { 
+ {
    answer:       5,
    post:         0,
    follower:     456,
    profileUrl:   'https://www.zhihu.com/people/shanelau1021',
    name:         '狂飙蜗牛',
-   sex:          'male' 
+   sex:          'male'
  }
 ```
 
 
 
 #### User.questions
-用户的提问列表  
+用户的提问列表
 @TODO
 
 #### User.answers
-用户的回答列表  
+用户的回答列表
 @TODO
 
 #### User.zhuanlansFocus
-用户关注的专栏  
+用户关注的专栏
 @TODO
 
 #### User.topic
-用户关注的话题信息  
+用户关注的话题信息
 @TODO
 
 ### Post API
@@ -111,7 +111,7 @@ zhihu.Post.info(postUrl).then(function(data){
 });
 ```
 
-**Result**  
+**Result**
 
 * Object
 
@@ -140,7 +140,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
 * `postUrl`  文章的url地址
 
-**Result**  
+**Result**
 
 用户数组
 
@@ -152,7 +152,7 @@ zhihu.Post.info(postUrl).then(function(data){
 
 * `name`  专栏的名字，比如 `bigertech`
 
-**Result**  
+**Result**
 
 ```javascript
 {
@@ -195,7 +195,7 @@ zhihu.Post.info(postUrl).then(function(data){
 zhihu.com/question/12345/answer/67890
                    ^^^^^        ^^^^^
           question token        answer token
-              
+
 zhihu.com/answer/12306/voters_profile
                  ^^^^^
                  answer id
@@ -215,7 +215,7 @@ Question.answers('19557271');
 Question.answers('19557271', 10); // start from 10
 Question.answers({token: '19557271', offset: 10});
 ```
-    
+
 
 ### Collection API
 问题的收藏列表
@@ -254,9 +254,9 @@ Collection.getDataByPage(url);
 根据话题id获取该话题下的问题，话题id为唯一标识，参见话题的url
 - `topicID` 话题的ID
 
-**Example**  
+**Example**
 
-请求这个话题：[生活、艺术、文化与活动][11]  
+请求这个话题：[生活、艺术、文化与活动][11]
 `topicID` 为 `19778317`
 
 ```javascript
@@ -270,7 +270,7 @@ zhihu.Topic.getTopicByID(topicID).then(function(result){
   **Result**
 
 参数说明
-  
+
 ```javascript
 /* You'll get
  * name:      (string) 话题名称
@@ -282,7 +282,7 @@ zhihu.Topic.getTopicByID(topicID).then(function(result){
  * - postTime:(string) 问题最近更新时间
  */
 
-{ 
+{
   name: '生活、艺术、文化与活动',
   page: 1,
   totalPage: 47242,
@@ -294,14 +294,15 @@ zhihu.Topic.getTopicByID(topicID).then(function(result){
       '19':
       { title: '360卫士在C盘为什么不可以删掉？',
         url: 'http://www.zhihu.com/question/27816632',
-        postTime: '5 分钟前' } 
-    } 
+        postTime: '5 分钟前' }
+    }
 }
 ```
 
 ## 贡献者
 1. shanelau
 2. Ivan Jiang (iplus26)
+3. [sunchenguang](https://github.com/sunchenguang)
 
 ## 更新记录
 #### 2016.5.23
