@@ -14,7 +14,7 @@ let Answer = require('./Answer');
 let Question = require('./Question');
 
 module.exports = {
-  zhuanlan,
+  Post: zhuanlan,
   User,
   Topic,
   Collection,

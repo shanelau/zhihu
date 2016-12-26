@@ -69,7 +69,7 @@ let likersDetail = (postUrl, config) => {
   });
 };
 
-let info = (postUrl) => {
+let articleInfo = (postUrl) => {
   let url = getRealUrl(API.post.info, postUrl);
   let options = {
     url,
@@ -81,12 +81,13 @@ let info = (postUrl) => {
   });
 };
 
-let page = (name, {limit = 10, offset = 10} = {}) => {
+let articleList = (name, config) => {
+  let query = config || QUERY.zhuanlan.articleList;
   let data = {
     url: _.template(API.post.page)({name}),
     qs: {
-      limit,
-      offset
+      limit: query.limit,
+      offset: query.offset
     }
   };
   return request(data).then((content) => {
@@ -126,8 +127,7 @@ let comments = (postUrl, config) => {
 module.exports = {
   likersDetail,
   comments,
-  articleInfo: info,
-  articleList: page,
-  info: zhuanlanInfo,
-
+  info: articleInfo,
+  page: articleList,
+  zhuanlanInfo
 };

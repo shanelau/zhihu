@@ -117,16 +117,16 @@ zhihu.Post.info(postUrl).then(function(data){
 
 [example][9]
 
-#### Post.page(name, options)
+#### Post.page(name[, config])
 获取专栏文章列表
 
 * `name` 专栏的英文名字， 例如：'bigertech'
-* `options`  {object}  ,默认值为10
+* `config`  可选，{object}  ,默认值如下
 
 ```javascript
 {
   limit: 10   // 记录数
-  offset: 10  // 偏移量
+  offset: 0  // 偏移量
 }
 ```
 
@@ -184,8 +184,48 @@ zhihu.Post.info(postUrl).then(function(data){
 	   canPost: false,
 	   activateAuthorRequested: false }
 ```
+#### Post.comments(postUrl[, config])
+获取专栏文章的评论信息
 
-
+* `postUrl`  专栏文章的url地址
+* `config` 可选，配置对象，默认 `{limit:10, offset:10}`
+```
+zhihu.Post.comments(`https://zhuanlan.zhihu.com/p/24241616?refer=chenyuz`).then(function(comments){
+  console.log(comments);
+});
+```
+**Result**  
+评论数组
+```
+[ 
+  { liked: false,
+    inReplyToCommentId: 0,
+    featured: false,
+    href: '/api/posts/24241616/comments/199226760',
+    reviewing: false,
+    disliked: false,
+    dislikesCount: 0,
+    id: 199226760,
+    author:
+     { profileUrl: 'https://www.zhihu.com/people/xu-xing-62-43',
+       bio: '',
+       hash: '6954117908c91a1c2897e466fc0545af',
+       uid: 647461616195604500,
+       isOrg: false,
+       description: '',
+       isOrgWhiteList: false,
+       slug: 'xu-xing-62-43',
+       avatar: [Object],
+       name: 'SP fan' },
+    content: 'ins即视感',
+    createdTime: '2016-12-07T21:56:25+08:00',
+    collapsed: false,
+    likesCount: 1 
+   },
+    ...
+    ...
+]
+```
 
 ### Answer API
 #### Answer.voters(answerId)
