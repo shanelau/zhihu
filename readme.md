@@ -21,9 +21,9 @@
 [DEMO](https://tonicdev.com/shanelau/575696208b908f1300212fff)
 
 ```javascript
-var zhihu = require('zhihu');
+let zhihu = require('zhihu');
 
-var username = 'shanejs';
+let username = 'shanejs';
     
 zhihu.User.info(username).then(function(user){
   console.log(user);
@@ -49,8 +49,8 @@ zhihu.User.info(username).then(function(user){
 比如请求这个用户 shanelau ([zhihu.com/people/shanelau](https://www.zhihu.com/people/shanelau)): 
 
 ```javascript
-var zhihu = require('zhihu');
-var name = 'shanelau';
+let zhihu = require('zhihu');
+let name = 'shanelau';
 	
 zhihu.User.info(name).then(function(user){
   console.log(user);
@@ -209,7 +209,7 @@ zhihu.com/answer/12306/voters_profile
 获取该问题的回答列表
 
 ```javascript
-var Question = require('zhihu').Question;
+let Question = require('zhihu').Question;
 
 Question.answers('19557271');
 Question.answers('19557271', 10); // start from 10
@@ -234,7 +234,7 @@ Collection.getAllPageData(url);
 获取某一页的页面数据
 
 ```javascript
-var url = 'http://www.zhihu.com/collection/25547043?page=1';
+let url = 'http://www.zhihu.com/collection/25547043?page=1';
 Collection.getDataByPage(url);
 ```
 
@@ -260,7 +260,7 @@ Collection.getDataByPage(url);
 `topicID` 为 `19778317`
 
 ```javascript
-var topicID = '19778317';
+let topicID = '19778317';
 zhihu.Topic.getTopicByID(topicID).then(function(result){
   console.log(result);
 });

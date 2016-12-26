@@ -7,14 +7,11 @@
  *
  */
 'use strict';
+const {request, cheerio} = require('../config/commonModules');
 
-const Promise = require('bluebird');
-const request = Promise.promisify(require('request'));
-const cheerio = require('cheerio');
 const config = require('../config');
 const API = require('../config/api');
-const url = require('url');
-const _ = require('lodash');
+
 
 function formatFollowData(str) {
   if (str.indexOf('K') !== -1) {
@@ -28,10 +25,10 @@ function formatFollowData(str) {
 
 /*
  * @param name  The name of Zhihu user
- * @return      A promise 
+ * @return      A promise
  */
-var info = function(name) {
-  var data = {
+let info = (name) => {
+  let data = {
     url: API.user.info,
     qs: {
       params: JSON.stringify({
@@ -40,40 +37,42 @@ var info = function(name) {
     },
   };
 
-  return request(data).then(function(content) {
-    var responseBody = content.body;
-    var $ = cheerio.load(responseBody);
-    var values = $('span.value');
-    var result = {
+  return request(data).then(function (content) {
+    let responseBody = content.body;
+    let $ = cheerio.load(responseBody);
+    let values = $('span.value');
+    let result = {
       answer: formatFollowData(values.eq(0).text()),
       post: formatFollowData(values.eq(1).text()),
       follower: formatFollowData(values.eq(2).text()),
     };
     result.profileUrl = config.zhihu + $('a.avatar-link').attr('href');
     result.name = $('span.name').text();
-    var male = $('.icon-profile-female');
+    let male = $('.icon-profile-female');
     result.sex = male.length === 1 ? 'female' : 'male';
     return result;
   });
 };
 
-var questions = function(qID) {};
+let questions = (qID) => {
+};
 
-var answers = function(qID) {};
+let answers = (qID) => {
+};
 
-var zhuanlansFocus = function() {};
+let zhuanlansFocus = () => {
+};
 
-var topic = function() {};
+let topic = () => {
+};
 
 module.exports = {
-
-  info: info,
-
+  info,
   // TODO
-  zhuanlansFocus: zhuanlansFocus,
-  question: questions,
-  answers: answers,
-  topic: topic,
+  zhuanlansFocus,
+  questions,
+  answers,
+  topic,
 
   // Deprecated
   getUserByName: info,
