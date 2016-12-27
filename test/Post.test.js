@@ -35,4 +35,17 @@ describe('Post', function () {
 
     });
   });
+  describe('#comments', function () {
+    it('should return zhuanlan article comments array', function (done) {
+      let postUrl = 'https://zhuanlan.zhihu.com/p/19888522';
+      Post.comments(postUrl).then(function (data) {
+        data.length.should.above(0);
+        done();
+      }).catch(function (err) {
+        console.error(err);
+      });
+
+    });
+  });
+
 });
