@@ -67,9 +67,9 @@ let getTopicTopAnswersByID = (topicID, page = 1) => {
       questions[index].comment_count = $('a.toggle-comment', this).last().text().match(/\d+/g)[0];
       questions[index].answer_url = API.zhihu + $('a.toggle-expand', this).attr('href');
       questions[index].user = {};
-      questions[index].user.name = $('h3.zm-item-answer-author-wrap a', this).text();
+      questions[index].user.name = $('div.zm-item-answer-author-info a', this).text();
       questions[index].user.url = API.zhihu
-        + $('h3.zm-item-answer-author-wrap a', this).attr('href');
+        + $('div.zm-item-answer-author-info a', this).attr('href');
       index++;
     });
 
