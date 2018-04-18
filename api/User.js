@@ -45,8 +45,7 @@ let info = (name) => {
     const workItem = $('.personal .info-wrap .item');
     const company = workItem.eq(0).text();
     const title = workItem.eq(1).text();
-
-    
+   
     let values = $('span.value');
     let result = {
       tagline,
