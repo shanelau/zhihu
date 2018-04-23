@@ -40,8 +40,16 @@ let info = (name) => {
   return request(data).then(function (content) {
     let responseBody = content.body;
     let $ = cheerio.load(responseBody);
+    
+    const tagline = $('.tagline').eq(0).text();
+    const workItem = $('.personal .info-wrap .item');
+    const company = workItem.eq(0).text();
+    const title = workItem.eq(1).text();
+   
     let values = $('span.value');
     let result = {
+      tagline,
+      work: `${company} ${title}`,
       answer: formatFollowData(values.eq(0).text()),
       post: formatFollowData(values.eq(1).text()),
       follower: formatFollowData(values.eq(2).text()),
